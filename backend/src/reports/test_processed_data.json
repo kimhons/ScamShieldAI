@@ -1,0 +1,172 @@
+{
+  "investigation_id": "test_001",
+  "subject": "john.doe@example.com",
+  "executive_summary": {
+    "subject": "john.doe@example.com",
+    "investigation_type": "Comprehensive",
+    "overall_risk_level": "MEDIUM",
+    "overall_risk_score": 0.37,
+    "confidence_level": 0.8679166666666667,
+    "key_findings": [],
+    "data_sources_used": 1,
+    "investigation_date": "2025-09-05",
+    "summary_statement": "Investigation shows MEDIUM risk indicators with 87% confidence. Additional verification suggested."
+  },
+  "risk_assessment": {
+    "overall_score": 0.37,
+    "risk_level": "MEDIUM",
+    "confidence": 0.8679166666666667,
+    "risk_factors": {
+      "identity_risk": 0.6000000000000001,
+      "financial_risk": 0.4,
+      "digital_risk": 0.5,
+      "compliance_risk": 0.0,
+      "threat_risk": 0.0
+    },
+    "risk_indicators": [
+      "High identity risk: 0.60",
+      "Suspicious TLD",
+      "Recent registration"
+    ],
+    "mitigation_recommendations": [
+      "Implement additional verification steps",
+      "Monitor for suspicious activity patterns",
+      "Consider periodic re-evaluation",
+      "Verify identity through additional documentation",
+      "Conduct enhanced background screening"
+    ]
+  },
+  "detailed_findings": {
+    "identity_verification": {
+      "identity_status": "Identity confirmed",
+      "address_history": [],
+      "employment_history": "Not available",
+      "education_verification": "Not verified",
+      "social_media_presence": "Not found",
+      "public_records": {}
+    },
+    "digital_footprint": {
+      "domain_analysis": {
+        "domain_age": "Recent registration (< 30 days)",
+        "ssl_certificate": "Not checked",
+        "dns_configuration": "Unknown",
+        "reputation_score": 0,
+        "risk_indicators": [
+          "Recent registration",
+          "Suspicious TLD"
+        ]
+      },
+      "email_analysis": {
+        "email_validity": "Unknown",
+        "domain_verification": "Not verified",
+        "authentication_status": "Unknown",
+        "phishing_indicators": []
+      }
+    },
+    "financial_intelligence": {
+      "credit_score": 0,
+      "financial_history": "Unknown",
+      "transaction_patterns": "Unknown",
+      "suspicious_activities": [],
+      "asset_verification": {}
+    },
+    "compliance_screening": {
+      "sanctions_screening": "Not screened",
+      "pep_screening": "Not screened",
+      "watchlist_screening": "Not screened",
+      "adverse_media": "Not checked",
+      "compliance_status": "Unknown",
+      "external_sanctions_matches": 0,
+      "screening_databases": []
+    },
+    "threat_assessment": {
+      "threat_level": "Unknown",
+      "security_incidents": "Not checked",
+      "malware_associations": "Not found",
+      "infrastructure_analysis": {},
+      "vulnerabilities": []
+    },
+    "background_check": {
+      "criminal_background": "No criminal records found",
+      "employment_verification": "Not verified",
+      "education_verification": "Not verified",
+      "reference_checks": "Not performed",
+      "professional_licenses": "Not checked"
+    }
+  },
+  "evidence_chain": [
+    {
+      "source": "ML Model: Overall Risk Score",
+      "data_type": "Machine Learning Prediction",
+      "finding": "Risk Level: LOW, Probability: 0.25",
+      "confidence": 0.87,
+      "timestamp": "2025-09-05T11:54:19.274048",
+      "verification_status": "AI Prediction"
+    },
+    {
+      "source": "CrewAI Background Specialist",
+      "data_type": "Criminal Background",
+      "finding": "No criminal records found",
+      "confidence": 0.92,
+      "timestamp": "2025-09-05T11:54:19.274040",
+      "verification_status": "AI Analysis"
+    },
+    {
+      "source": "CrewAI Background Specialist",
+      "data_type": "Identity Verification",
+      "finding": "Identity confirmed",
+      "confidence": 0.92,
+      "timestamp": "2025-09-05T11:54:19.274038",
+      "verification_status": "AI Analysis"
+    },
+    {
+      "source": "CrewAI Background Specialist",
+      "data_type": "Agent Analysis",
+      "finding": "Risk Level: LOW",
+      "confidence": 0.92,
+      "timestamp": "2025-09-05T11:54:19.274035",
+      "verification_status": "AI Analysis"
+    },
+    {
+      "source": "CrewAI Domain Specialist",
+      "data_type": "Domain Age",
+      "finding": "Recent registration (< 30 days)",
+      "confidence": 0.85,
+      "timestamp": "2025-09-05T11:54:19.274031",
+      "verification_status": "AI Analysis"
+    },
+    {
+      "source": "CrewAI Domain Specialist",
+      "data_type": "Agent Analysis",
+      "finding": "Risk Level: MEDIUM",
+      "confidence": 0.85,
+      "timestamp": "2025-09-05T11:54:19.274021",
+      "verification_status": "AI Analysis"
+    }
+  ],
+  "recommendations": [
+    "Implement additional verification steps",
+    "Monitor for suspicious activity patterns",
+    "Consider periodic re-evaluation",
+    "Verify identity through additional documentation",
+    "Conduct enhanced background screening"
+  ],
+  "compliance_status": "CLEAR",
+  "metadata": {
+    "processing_timestamp": "2025-09-05T11:54:19.274126",
+    "data_quality": {
+      "completeness_score": 0.6666666666666666,
+      "quality_score": 0.935,
+      "validation_errors": 3,
+      "validation_warnings": 0
+    },
+    "data_sources": {
+      "crew_agents": 2,
+      "api_responses": 1,
+      "ml_predictions": 1
+    },
+    "processing_version": "1.0.0",
+    "processor": "ScamShield AI Report Engine"
+  },
+  "processed_at": "2025-09-05T11:54:19.274141"
+}

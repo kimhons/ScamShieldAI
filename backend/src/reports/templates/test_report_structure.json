@@ -1,0 +1,202 @@
+{
+  "template_info": {
+    "template_id": "professional_v1",
+    "name": "Professional Investigation Report",
+    "report_type": "professional",
+    "page_limit": 25,
+    "detail_level": "detailed"
+  },
+  "cover_page": {
+    "title": "Professional Investigation Report",
+    "subtitle": "Investigation Report",
+    "subject": "john.doe@example.com",
+    "report_id": "test_001",
+    "generated_date": "September 05, 2025",
+    "generated_time": "11:58 AM",
+    "investigator": "ScamShield AI System",
+    "classification": "CONFIDENTIAL",
+    "logo": "scamshield_logo.png"
+  },
+  "executive_summary": {
+    "overview": "This detailed investigation report provides a comprehensive analysis of john.doe@example.com.",
+    "risk_assessment": {
+      "level": "MEDIUM",
+      "score": 0.45,
+      "confidence": 0.87
+    },
+    "key_findings": [
+      "Domain recently registered",
+      "Clean background check"
+    ],
+    "data_sources": 9,
+    "investigation_scope": [
+      "Identity verification and background screening",
+      "Digital footprint and online presence analysis",
+      "Financial intelligence and transaction monitoring",
+      "Compliance screening and sanctions checking",
+      "Threat assessment and security evaluation"
+    ],
+    "summary_statement": "Investigation completed successfully."
+  },
+  "sections": [
+    {
+      "id": "investigation_overview",
+      "title": "Investigation Overview & Methodology",
+      "content_type": "text",
+      "order": 1,
+      "content": {},
+      "template": "professional_overview_template",
+      "max_length": 800
+    },
+    {
+      "id": "identity_verification",
+      "title": "Identity Verification & Background Analysis",
+      "content_type": "text",
+      "order": 2,
+      "content": {
+        "status": "verified"
+      },
+      "template": "professional_identity_template",
+      "max_length": 1500
+    },
+    {
+      "id": "digital_footprint",
+      "title": "Digital Footprint & Online Presence",
+      "content_type": "text",
+      "order": 3,
+      "content": {
+        "domain_age": "recent"
+      },
+      "template": "professional_digital_template",
+      "max_length": 1200
+    },
+    {
+      "id": "financial_intelligence",
+      "title": "Financial Intelligence & Transaction Analysis",
+      "content_type": "text",
+      "order": 4,
+      "content": {},
+      "template": "professional_financial_template",
+      "max_length": 1200
+    },
+    {
+      "id": "compliance_screening",
+      "title": "Regulatory Compliance & Sanctions Screening",
+      "content_type": "text",
+      "order": 5,
+      "content": {
+        "status": "clear"
+      },
+      "template": "professional_compliance_template",
+      "max_length": 1000
+    },
+    {
+      "id": "threat_assessment",
+      "title": "Security Threat Assessment & Risk Indicators",
+      "content_type": "text",
+      "order": 6,
+      "content": {},
+      "template": "professional_threat_template",
+      "max_length": 1000
+    },
+    {
+      "id": "intelligence_analysis",
+      "title": "Intelligence Fusion & Cross-Source Analysis",
+      "content_type": "text",
+      "order": 7,
+      "content": {},
+      "template": "professional_intelligence_template",
+      "max_length": 800
+    },
+    {
+      "id": "risk_assessment",
+      "title": "Comprehensive Risk Assessment",
+      "content_type": "table",
+      "order": 8,
+      "content": {},
+      "template": "professional_risk_template",
+      "max_length": 600
+    },
+    {
+      "id": "recommendations",
+      "title": "Strategic Recommendations & Mitigation",
+      "content_type": "list",
+      "order": 9,
+      "content": {},
+      "template": "professional_recommendations_template",
+      "max_length": 800
+    }
+  ],
+  "appendices": {
+    "methodology": "\n        This investigation employed a multi-source intelligence approach utilizing:\n        \n        1. Automated AI agent analysis across specialized domains\n        2. External API integration for real-time data verification\n        3. Machine learning models for fraud detection and risk assessment\n        4. Comprehensive evidence chain documentation\n        5. Cross-reference validation across multiple data sources\n        \n        All findings are based on publicly available information and authorized data sources.\n        ",
+    "data_sources": [
+      "CrewAI Multi-Agent Investigation System",
+      "OpenSanctions Global Database",
+      "Alpha Vantage Financial Intelligence",
+      "WhoisXML Domain Intelligence",
+      "Shodan Infrastructure Analysis",
+      "IPinfo Geolocation Services",
+      "Cloudflare DNS Intelligence",
+      "RapidAPI Background Check Services",
+      "MaxMind GeoIP Database",
+      "Companies House Business Registry"
+    ],
+    "legal_disclaimers": [
+      "This report is based on information available at the time of investigation.",
+      "ScamShield AI makes no warranties regarding the accuracy or completeness of third-party data.",
+      "This report is for informational purposes only and should not be considered legal advice.",
+      "Users should verify critical information through additional sources before making decisions.",
+      "Data sources may have varying levels of accuracy and timeliness.",
+      "This investigation complies with applicable privacy and data protection regulations."
+    ],
+    "glossary": {
+      "PEP": "Politically Exposed Person - Individual with prominent public functions",
+      "OFAC": "Office of Foreign Assets Control - US Treasury sanctions authority",
+      "KYC": "Know Your Customer - Identity verification process",
+      "AML": "Anti-Money Laundering - Financial crime prevention measures",
+      "DNS": "Domain Name System - Internet naming system",
+      "SSL": "Secure Sockets Layer - Web security protocol",
+      "API": "Application Programming Interface - Software integration method",
+      "ML": "Machine Learning - Artificial intelligence technique"
+    },
+    "evidence_chain": []
+  },
+  "styling": {
+    "theme": "executive_professional",
+    "colors": {
+      "primary": "#1e3a8a",
+      "secondary": "#374151",
+      "accent": "#0369a1",
+      "text": "#111827",
+      "background": "#ffffff",
+      "table_header": "#f9fafb",
+      "table_border": "#d1d5db",
+      "highlight": "#fef3c7"
+    },
+    "fonts": {
+      "heading": "Times New Roman, serif",
+      "body": "Arial, sans-serif",
+      "heading_size": "22px",
+      "subheading_size": "18px",
+      "body_size": "11px",
+      "caption_size": "10px"
+    },
+    "layout": {
+      "margins": "1.25 inch",
+      "line_spacing": "1.4",
+      "paragraph_spacing": "10pt",
+      "section_spacing": "16pt",
+      "page_numbers": true,
+      "headers_footers": true
+    }
+  },
+  "metadata": {
+    "template_version": "1.0.0",
+    "generation_timestamp": "2025-09-05T11:58:50.070559",
+    "data_quality_score": 0,
+    "completeness_score": 0,
+    "processing_time": "15.2 seconds",
+    "total_pages": 9,
+    "word_count": 3600
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "executive_summary": {
+    "overview": "This investigation analyzed john.doe@example.com using automated intelligence gathering and risk assessment tools. The analysis covered identity verification, compliance screening, and basic risk factors. Overall risk level was determined to be MEDIUM.",
+    "risk_assessment": {},
+    "key_findings": [
+      "\u2022 Domain recently registered",
+      "\u2022 Clean background check",
+      "\u2022 No sanctions matches"
+    ],
+    "data_sources": 9,
+    "summary_statement": "Investigation shows medium risk with high confidence."
+  },
+  "sections": [
+    {
+      "section_id": "identity_verification",
+      "title": "Identity Verification",
+      "overview": "Identity verification status: Identity confirmed. Address history shows 2 known addresses.",
+      "analysis": "Key findings: \u2022 Identity Status: Identity confirmed \u2022 Address History: 2 items identified \u2022 Criminal Background: No criminal records found No significant risk indicators identified.",
+      "findings": [
+        "\u2022 Identity Status: Identity confirmed",
+        "\u2022 Address History: 2 items",
+        "\u2022 Criminal Background: No criminal records found"
+      ],
+      "data": {
+        "identity_status": "Identity confirmed",
+        "address_history": [
+          "123 Main St",
+          "456 Oak Ave"
+        ],
+        "criminal_background": "No criminal records found"
+      }
+    },
+    {
+      "section_id": "digital_footprint",
+      "title": "Digital Footprint",
+      "overview": "Domain analysis shows Recent registration (< 30 days) with 2 risk indicators identified.",
+      "analysis": "Key findings: No significant risk indicators identified.",
+      "findings": [
+        "\u2022 Domain Age: Recent registration (< 30 days)",
+        "\u2022 Email Validity: Valid email format"
+      ],
+      "data": {
+        "domain_analysis": {
+          "domain_age": "Recent registration (< 30 days)",
+          "risk_indicators": [
+            "Recent registration",
+            "Suspicious TLD"
+          ]
+        },
+        "email_analysis": {
+          "email_validity": "Valid email format",
+          "phishing_indicators": []
+        }
+      }
+    },
+    {
+      "section_id": "compliance_screening",
+      "title": "Compliance Screening",
+      "overview": "Compliance status: CLEAR. Sanctions and PEP screening completed.",
+      "analysis": "Key findings: \u2022 Sanctions Screening: No sanctions matches found \u2022 Pep Screening: Not a politically exposed person \u2022 Compliance Status: CLEAR No significant risk indicators identified.",
+      "findings": [
+        "\u2022 Sanctions Screening: No sanctions matches found",
+        "\u2022 Pep Screening: Not a politically exposed person",
+        "\u2022 Compliance Status: CLEAR"
+      ],
+      "data": {
+        "sanctions_screening": "No sanctions matches found",
+        "pep_screening": "Not a politically exposed person",
+        "compliance_status": "CLEAR"
+      }
+    }
+  ],
+  "recommendations": {
+    "content": "Based on the investigation findings, the following actions are recommended:\n\n1. Monitor domain for suspicious activity\n2. Verify domain ownership\n3. Implement standard monitoring procedures\n",
+    "recommendations_count": 3,
+    "risk_level": "MEDIUM"
+  },
+  "conclusion": {
+    "content": "\n            This investigation determined a MEDIUM risk level with 87% confidence. \n            The findings provide sufficient information for risk-based decision making.\n            ",
+    "risk_level": "MEDIUM",
+    "confidence": 0.87
+  },
+  "generation_metadata": {
+    "generated_at": "2025-09-05T11:59:29.162503",
+    "template_type": "basic",
+    "content_generator_version": "1.0.0",
+    "total_sections": 3
+  }
+}

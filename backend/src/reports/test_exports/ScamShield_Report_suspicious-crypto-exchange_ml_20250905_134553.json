@@ -1,0 +1,38 @@
+{
+  "export_metadata": {
+    "format": "json",
+    "version": "1.0",
+    "exported_at": "2025-09-05T13:45:53.621662",
+    "exporter": "ScamShield AI Multi-Format Exporter"
+  },
+  "report_data": {
+    "investigation_id": "test-12345",
+    "subject_identifier": "suspicious-crypto-exchange.ml",
+    "investigation_type": "comprehensive",
+    "report_tier": "professional",
+    "generation_time_seconds": 2.45,
+    "timestamp": "2025-09-05T13:45:53.621457",
+    "report": {
+      "sections": [
+        {
+          "title": "Executive Summary",
+          "content": "This is a test investigation report demonstrating multi-format export capabilities."
+        },
+        {
+          "title": "Risk Assessment",
+          "content": "Risk level: HIGH. Confidence: 87%. Multiple risk indicators identified."
+        }
+      ]
+    },
+    "metadata": {
+      "quality_score": 0.98,
+      "data_sources": 8
+    }
+  },
+  "schema_version": "2.0",
+  "data_integrity": {
+    "checksum": "837cfc49fb3dfe57717f8e4e00052274",
+    "total_fields": 15,
+    "validation_status": "passed"
+  }
+}

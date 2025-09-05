@@ -1,0 +1,278 @@
+{
+  "report_tier": "professional",
+  "price": "$49.99",
+  "page_count": "15-25 pages",
+  "classification": "CONFIDENTIAL",
+  "case_reference": "SCAM-2025-0905-813",
+  "title_page": {
+    "title": "SCAMSHIELD AI INVESTIGATION REPORT - BASIC TIER",
+    "case_reference": "SCAM-2025-0905-001",
+    "investigation_date": "September 05, 2025",
+    "classification": "CONFIDENTIAL",
+    "investigator": "ScamShield AI Automated Investigation System",
+    "quality_assurance": "Automated Verification & Validation"
+  },
+  "executive_summary": {
+    "investigation_type": "Basic Identity & Risk Assessment",
+    "data_sources_used": 8,
+    "overall_confidence": 0.8375,
+    "risk_statement": "Analysis confirms MEDIUM risk level with high confidence (84%)",
+    "key_findings": [
+      "\u2713 Multi-source analysis completed using 8 verified data sources",
+      "\u2713 Domain Fraud Detection: High confidence assessment (87%)",
+      "\u2713 Identity Verification: High confidence assessment (85%)",
+      "\u2713 Financial Fraud Detection: High confidence assessment (72%)",
+      "\u2713 Threat Assessment: High confidence assessment (91%)"
+    ],
+    "limitations": [
+      "Assessment based on publicly available data sources only",
+      "Limited financial transaction analysis",
+      "Point-in-time assessment subject to change"
+    ]
+  },
+  "methodology": {
+    "investigation_framework": "ScamShield AI Multi-Agent Analysis System",
+    "data_sources": [
+      {
+        "source_name": "opensanctions",
+        "purpose": "Sanctions and PEP screening",
+        "data_quality": "excellent",
+        "confidence": "98%",
+        "verification_status": "verified",
+        "timestamp": "2025-09-05 12:44:22 UTC"
+      },
+      {
+        "source_name": "whoisxml",
+        "purpose": "Domain registration and DNS analysis",
+        "data_quality": "excellent",
+        "confidence": "100%",
+        "verification_status": "verified",
+        "timestamp": "2025-09-05 12:44:37 UTC"
+      },
+      {
+        "source_name": "shodan",
+        "purpose": "Infrastructure and security assessment",
+        "data_quality": "good",
+        "confidence": "95%",
+        "verification_status": "verified",
+        "timestamp": "2025-09-05 12:44:52 UTC"
+      },
+      {
+        "source_name": "background_check",
+        "purpose": "Identity verification and background analysis",
+        "data_quality": "good",
+        "confidence": "85%",
+        "verification_status": "verified",
+        "timestamp": "2025-09-05 12:45:07 UTC"
+      },
+      {
+        "source_name": "ipinfo",
+        "purpose": "Geolocation and network analysis",
+        "data_quality": "excellent",
+        "confidence": "100%",
+        "verification_status": "verified",
+        "timestamp": "2025-09-05 12:45:22 UTC"
+      },
+      {
+        "source_name": "cloudflare",
+        "purpose": "DNS security and configuration analysis",
+        "data_quality": "good",
+        "confidence": "92%",
+        "verification_status": "verified",
+        "timestamp": "2025-09-05 12:45:37 UTC"
+      },
+      {
+        "source_name": "alphavantage",
+        "purpose": "Financial intelligence and market data",
+        "data_quality": "limited",
+        "confidence": "75%",
+        "verification_status": "failed",
+        "timestamp": "2025-09-05 12:45:52 UTC"
+      },
+      {
+        "source_name": "companies_house",
+        "purpose": "Data analysis and verification",
+        "data_quality": "good",
+        "confidence": "88%",
+        "verification_status": "verified",
+        "timestamp": "2025-09-05 12:46:07 UTC"
+      }
+    ],
+    "quality_assurance": [
+      "Automated source authentication and validation",
+      "Cross-reference verification where multiple sources available",
+      "Confidence scoring based on source reliability metrics",
+      "Temporal accuracy validation for all data points"
+    ],
+    "limitations": [
+      "Analysis limited to available data sources at investigation time",
+      "Some data sources may have access restrictions or rate limits",
+      "Risk assessment reflects current information and may change"
+    ]
+  },
+  "detailed_findings": [
+    {
+      "section_id": "identity_verification",
+      "title": "Identity Verification & Background Analysis",
+      "findings": [
+        {
+          "finding": "Identity verification completed via background_check",
+          "confidence": "85%",
+          "source": "background_check",
+          "timestamp": "2025-09-05 12:45:07 UTC",
+          "evidence_quality": "good"
+        }
+      ],
+      "risk_assessment": "LOW - Identity verification successful",
+      "evidence_quality": "Good - Multiple verification sources"
+    }
+  ],
+  "risk_assessment": {
+    "overall_risk_score": 0.283,
+    "overall_risk_level": "LOW",
+    "overall_confidence": 0.6285,
+    "domain_breakdown": {
+      "identity_verification": {
+        "risk_score": 0.15000000000000002,
+        "confidence": 0.85,
+        "weight": 0.25,
+        "weighted_score": 0.037500000000000006
+      },
+      "digital_infrastructure": {
+        "risk_score": 0.25,
+        "confidence": 0.5,
+        "weight": 0.3,
+        "weighted_score": 0.075
+      },
+      "financial_intelligence": {
+        "risk_score": 0.25,
+        "confidence": 0.5,
+        "weight": 0.2,
+        "weighted_score": 0.05
+      },
+      "compliance_screening": {
+        "risk_score": 0.5,
+        "confidence": 0.5,
+        "weight": 0.15,
+        "weighted_score": 0.075
+      },
+      "threat_assessment": {
+        "risk_score": 0.455,
+        "confidence": 0.91,
+        "weight": 0.1,
+        "weighted_score": 0.045500000000000006
+      }
+    },
+    "risk_calculation_method": "Weighted scoring with confidence intervals",
+    "confidence_statement": "Assessment confidence: 63% based on available data sources"
+  },
+  "recommendations": {
+    "recommendations": [],
+    "implementation_priority": "Evidence-based prioritization",
+    "success_metrics": "Quantifiable improvement targets",
+    "review_cycle": "90-day re-assessment recommended"
+  },
+  "conclusion": {
+    "conclusion_statement": "This investigation provides a high-confidence assessment based on comprehensive multi-source analysis.",
+    "overall_confidence": 0.8375,
+    "data_quality_summary": "Analysis based on 8 verified data sources",
+    "limitations": [
+      "Assessment reflects information available at time of investigation",
+      "Risk profile may change with new information or circumstances",
+      "Recommendations should be reviewed with appropriate legal counsel"
+    ],
+    "professional_disclaimer": "This report is generated by automated analysis systems and should be reviewed by qualified professionals for critical decisions."
+  },
+  "appendices": {
+    "evidence_chain": [
+      {
+        "evidence_id": "EVD-001",
+        "source": "opensanctions",
+        "timestamp": "2025-09-05T12:44:22.213588",
+        "verification_status": "verified",
+        "data_quality": "excellent"
+      },
+      {
+        "evidence_id": "EVD-002",
+        "source": "whoisxml",
+        "timestamp": "2025-09-05T12:44:37.213588",
+        "verification_status": "verified",
+        "data_quality": "excellent"
+      },
+      {
+        "evidence_id": "EVD-003",
+        "source": "shodan",
+        "timestamp": "2025-09-05T12:44:52.213588",
+        "verification_status": "verified",
+        "data_quality": "good"
+      },
+      {
+        "evidence_id": "EVD-004",
+        "source": "background_check",
+        "timestamp": "2025-09-05T12:45:07.213588",
+        "verification_status": "verified",
+        "data_quality": "good"
+      },
+      {
+        "evidence_id": "EVD-005",
+        "source": "ipinfo",
+        "timestamp": "2025-09-05T12:45:22.213588",
+        "verification_status": "verified",
+        "data_quality": "excellent"
+      },
+      {
+        "evidence_id": "EVD-006",
+        "source": "cloudflare",
+        "timestamp": "2025-09-05T12:45:37.213588",
+        "verification_status": "verified",
+        "data_quality": "good"
+      },
+      {
+        "evidence_id": "EVD-007",
+        "source": "alphavantage",
+        "timestamp": "2025-09-05T12:45:52.213588",
+        "verification_status": "failed",
+        "data_quality": "limited"
+      },
+      {
+        "evidence_id": "EVD-008",
+        "source": "companies_house",
+        "timestamp": "2025-09-05T12:46:07.213588",
+        "verification_status": "verified",
+        "data_quality": "good"
+      }
+    ],
+    "quality_metrics": {
+      "total_sources": 8,
+      "verified_sources": 7,
+      "average_confidence": 0.91625
+    },
+    "validation_summary": {
+      "hallucination_checks": "Comprehensive validation applied",
+      "source_attribution": "100% of claims attributed to verified sources",
+      "confidence_scoring": "Statistical confidence assigned to all findings",
+      "quality_assurance": "Automated validation and cross-reference protocols"
+    }
+  },
+  "enhanced_features": [
+    "Advanced risk modeling",
+    "Machine learning analysis",
+    "Expert-level assessment",
+    "Legal-grade documentation",
+    "Comprehensive evidence chain"
+  ],
+  "formatting_metadata": {
+    "template_version": "2.0.0",
+    "formatting_standard": "Professional Investigation Report Format",
+    "hallucination_prevention": "Comprehensive Guardrails Applied",
+    "generated_at": "2025-09-05T12:46:22.214187",
+    "quality_score": 0.9790625
+  },
+  "sample_metadata": {
+    "report_type": "Sample Professional Investigation Report",
+    "demonstration_purpose": "Showcase ScamShield AI professional reporting capabilities",
+    "subject": "suspicious-crypto-exchange.ml",
+    "investigation_scenario": "Cryptocurrency exchange fraud investigation",
+    "generated_for": "ScamShield AI Platform Demonstration"
+  }
+}

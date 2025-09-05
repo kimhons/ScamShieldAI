@@ -1,0 +1,551 @@
+{
+  "investigation_id": "test_001",
+  "subject": "john.doe@example.com",
+  "investigation_type": "comprehensive",
+  "crew_results": {
+    "domain_analysis": {
+      "agent": "Domain Specialist",
+      "task": "Domain fraud analysis",
+      "findings": {
+        "domain_age": "Recent registration (< 30 days)",
+        "ssl_certificate": "Valid SSL certificate found",
+        "dns_configuration": "Standard DNS setup",
+        "reputation_score": 0.75,
+        "risk_indicators": [
+          "Recent registration",
+          "Suspicious TLD"
+        ],
+        "whois_data": {
+          "registrar": "GoDaddy",
+          "creation_date": "2024-01-15",
+          "expiration_date": "2025-01-15"
+        }
+      },
+      "risk_assessment": {
+        "level": "MEDIUM",
+        "score": 0.65,
+        "confidence": 0.85
+      },
+      "recommendations": [
+        "Monitor domain for suspicious activity",
+        "Verify domain ownership",
+        "Check for typosquatting patterns"
+      ],
+      "completed_at": "2025-09-05T11:54:15.129670"
+    },
+    "email_analysis": {
+      "agent": "Email Specialist",
+      "task": "Email fraud analysis",
+      "findings": {
+        "email_validity": "Valid email format",
+        "domain_verification": "Domain exists and active",
+        "spf_record": "SPF record found",
+        "dkim_signature": "DKIM validation passed",
+        "reputation_score": 0.8,
+        "phishing_indicators": [
+          "Suspicious subject line",
+          "Urgent language"
+        ],
+        "header_analysis": {
+          "authentication_results": "PASS",
+          "spam_score": 2.1,
+          "origin_country": "United States"
+        }
+      },
+      "risk_assessment": {
+        "level": "LOW",
+        "score": 0.25,
+        "confidence": 0.9
+      },
+      "recommendations": [
+        "Email appears legitimate",
+        "Monitor for future suspicious activity",
+        "Verify sender identity if needed"
+      ],
+      "completed_at": "2025-09-05T11:54:15.129701"
+    },
+    "financial_analysis": {
+      "agent": "Financial Intelligence Specialist",
+      "task": "Financial fraud analysis",
+      "findings": {
+        "transaction_patterns": "Normal transaction behavior",
+        "account_verification": "Account exists and active",
+        "credit_score": 720,
+        "financial_history": "Clean financial record",
+        "suspicious_activities": [],
+        "asset_verification": {
+          "bank_accounts": "Verified",
+          "investment_accounts": "Not found",
+          "real_estate": "Property ownership confirmed"
+        }
+      },
+      "risk_assessment": {
+        "level": "LOW",
+        "score": 0.15,
+        "confidence": 0.88
+      },
+      "recommendations": [
+        "Financial profile appears legitimate",
+        "No immediate red flags identified",
+        "Continue monitoring for changes"
+      ],
+      "completed_at": "2025-09-05T11:54:15.129725"
+    },
+    "crypto_analysis": {
+      "agent": "Cryptocurrency Specialist",
+      "task": "Cryptocurrency fraud analysis",
+      "findings": {
+        "wallet_analysis": "No suspicious wallet activity",
+        "transaction_history": "Limited cryptocurrency activity",
+        "exchange_verification": "No exchange accounts found",
+        "blockchain_analysis": "Clean transaction history",
+        "compliance_status": "No sanctions matches",
+        "risk_indicators": [],
+        "wallet_addresses": []
+      },
+      "risk_assessment": {
+        "level": "LOW",
+        "score": 0.1,
+        "confidence": 0.75
+      },
+      "recommendations": [
+        "No cryptocurrency fraud indicators found",
+        "Subject has minimal crypto exposure",
+        "No immediate compliance concerns"
+      ],
+      "completed_at": "2025-09-05T11:54:15.129746"
+    },
+    "background_check": {
+      "agent": "Background Check Specialist",
+      "task": "Identity verification and background check",
+      "findings": {
+        "identity_verification": "Identity confirmed",
+        "address_history": [
+          "123 Main St, Anytown, USA"
+        ],
+        "employment_history": "Stable employment record",
+        "education_verification": "Degree verified",
+        "criminal_background": "No criminal records found",
+        "social_media_presence": "Normal social media activity",
+        "public_records": {
+          "voter_registration": "Registered voter",
+          "property_ownership": "Homeowner",
+          "business_registrations": "No business entities"
+        }
+      },
+      "risk_assessment": {
+        "level": "LOW",
+        "score": 0.2,
+        "confidence": 0.92
+      },
+      "recommendations": [
+        "Background check shows no red flags",
+        "Identity appears legitimate",
+        "No criminal or fraud history found"
+      ],
+      "completed_at": "2025-09-05T11:54:15.129767"
+    },
+    "threat_assessment": {
+      "agent": "Threat Assessment Specialist",
+      "task": "Security threat analysis",
+      "findings": {
+        "threat_level": "LOW",
+        "security_incidents": "No incidents found",
+        "malware_associations": "No malware connections",
+        "botnet_activity": "No botnet participation",
+        "attack_patterns": "No attack patterns identified",
+        "infrastructure_analysis": {
+          "hosting_provider": "Legitimate provider",
+          "ip_reputation": "Clean IP reputation",
+          "network_analysis": "Standard network configuration"
+        }
+      },
+      "risk_assessment": {
+        "level": "LOW",
+        "score": 0.05,
+        "confidence": 0.95
+      },
+      "recommendations": [
+        "No immediate security threats identified",
+        "Infrastructure appears legitimate",
+        "Continue monitoring for changes"
+      ],
+      "completed_at": "2025-09-05T11:54:15.129806"
+    },
+    "intelligence_fusion": {
+      "agent": "Intelligence Fusion Specialist",
+      "task": "Cross-source intelligence analysis",
+      "findings": {
+        "correlation_analysis": "Data sources align consistently",
+        "contradiction_detection": "No contradictions found",
+        "confidence_scoring": "High confidence in findings",
+        "pattern_recognition": "Normal behavioral patterns",
+        "anomaly_detection": "No significant anomalies",
+        "intelligence_gaps": [
+          "Limited social media data"
+        ],
+        "data_quality": {
+          "completeness": 0.85,
+          "accuracy": 0.92,
+          "timeliness": 0.88
+        }
+      },
+      "risk_assessment": {
+        "level": "LOW",
+        "score": 0.18,
+        "confidence": 0.9
+      },
+      "recommendations": [
+        "Intelligence analysis shows consistent low risk",
+        "All data sources align with legitimate profile",
+        "No intelligence gaps of concern"
+      ],
+      "completed_at": "2025-09-05T11:54:15.129828"
+    },
+    "compliance_screening": {
+      "agent": "Compliance Screening Specialist",
+      "task": "Regulatory compliance analysis",
+      "findings": {
+        "sanctions_screening": "No sanctions matches found",
+        "pep_screening": "Not a politically exposed person",
+        "watchlist_screening": "No watchlist matches",
+        "adverse_media": "No negative media coverage",
+        "regulatory_actions": "No regulatory actions found",
+        "compliance_status": "CLEAR",
+        "screening_databases": [
+          "OFAC SDN List",
+          "EU Sanctions List",
+          "UK Sanctions List",
+          "UN Sanctions List"
+        ]
+      },
+      "risk_assessment": {
+        "level": "LOW",
+        "score": 0.02,
+        "confidence": 0.98
+      },
+      "recommendations": [
+        "Subject passes all compliance screenings",
+        "No regulatory or sanctions concerns",
+        "Safe for business relationships"
+      ],
+      "completed_at": "2025-09-05T11:54:15.129848"
+    }
+  },
+  "api_responses": {
+    "opensanctions": {
+      "api": "OpenSanctions",
+      "status": "success",
+      "data": {
+        "sanctions_matches": [],
+        "pep_matches": [],
+        "watchlist_matches": [],
+        "total_matches": 0,
+        "confidence": 0.95
+      },
+      "queried_at": "2025-09-05T11:54:15.129945"
+    },
+    "alphavantage": {
+      "api": "Alpha Vantage",
+      "status": "success",
+      "data": {
+        "company_overview": {
+          "symbol": "UNKNOWN",
+          "name": "No public company found",
+          "sector": "N/A",
+          "market_cap": 0
+        },
+        "financial_metrics": {},
+        "stock_performance": {}
+      },
+      "queried_at": "2025-09-05T11:54:15.129958"
+    },
+    "whoisxml": {
+      "api": "WhoisXML",
+      "status": "success",
+      "data": {
+        "domain_info": {
+          "registrar": "GoDaddy",
+          "creation_date": "2024-01-15",
+          "expiration_date": "2025-01-15",
+          "name_servers": [
+            "ns1.godaddy.com",
+            "ns2.godaddy.com"
+          ]
+        },
+        "registrant_info": {
+          "name": "REDACTED FOR PRIVACY",
+          "organization": "Private Registration",
+          "country": "US"
+        }
+      },
+      "queried_at": "2025-09-05T11:54:15.129971"
+    },
+    "shodan": {
+      "api": "Shodan",
+      "status": "success",
+      "data": {
+        "host_info": {
+          "ip": "192.168.1.1",
+          "hostnames": [
+            "example.com"
+          ],
+          "country": "US",
+          "organization": "Example Hosting"
+        },
+        "open_ports": [
+          80,
+          443
+        ],
+        "services": [
+          "HTTP",
+          "HTTPS"
+        ],
+        "vulnerabilities": []
+      },
+      "queried_at": "2025-09-05T11:54:15.129981"
+    },
+    "ipinfo": {
+      "api": "IPinfo",
+      "status": "success",
+      "data": {
+        "ip": "192.168.1.1",
+        "city": "San Francisco",
+        "region": "California",
+        "country": "US",
+        "organization": "Example ISP",
+        "timezone": "America/Los_Angeles"
+      },
+      "queried_at": "2025-09-05T11:54:15.129991"
+    },
+    "cloudflare": {
+      "api": "Cloudflare",
+      "status": "success",
+      "data": {
+        "dns_records": [
+          {
+            "type": "A",
+            "value": "192.168.1.1"
+          },
+          {
+            "type": "MX",
+            "value": "mail.example.com"
+          }
+        ],
+        "security_features": [
+          "DDoS Protection",
+          "SSL/TLS"
+        ],
+        "performance_metrics": {
+          "response_time": "50ms"
+        }
+      },
+      "queried_at": "2025-09-05T11:54:15.130002"
+    },
+    "rapidapi": {
+      "api": "RapidAPI",
+      "status": "success",
+      "data": {
+        "background_check": {
+          "identity_verified": true,
+          "criminal_records": [],
+          "address_history": [
+            "123 Main St, Anytown, USA"
+          ],
+          "employment_history": "Available"
+        },
+        "social_verification": {
+          "social_media_found": true,
+          "profile_consistency": "High",
+          "activity_level": "Normal"
+        }
+      },
+      "queried_at": "2025-09-05T11:54:15.130012"
+    },
+    "maxmind": {
+      "api": "MaxMind",
+      "status": "success",
+      "data": {
+        "geolocation": {
+          "country": "United States",
+          "city": "San Francisco",
+          "latitude": 37.7749,
+          "longitude": -122.4194
+        },
+        "isp_info": {
+          "isp": "Example ISP",
+          "organization": "Example Corp",
+          "connection_type": "Cable/DSL"
+        }
+      },
+      "queried_at": "2025-09-05T11:54:15.130030"
+    },
+    "companies_house": {
+      "api": "Companies House",
+      "status": "success",
+      "data": {
+        "company_search": {
+          "matches_found": 0,
+          "companies": []
+        },
+        "officer_search": {
+          "matches_found": 0,
+          "officers": []
+        }
+      },
+      "queried_at": "2025-09-05T11:54:15.130041"
+    }
+  },
+  "ml_predictions": {
+    "domain_fraud_score": {
+      "model": "Domain Fraud Detection",
+      "prediction": {
+        "fraud_probability": 0.15,
+        "risk_level": "LOW",
+        "confidence": 0.88
+      },
+      "features": {
+        "domain_age": 30,
+        "ssl_certificate_age": 25,
+        "dns_records_count": 8,
+        "reputation_score": 0.75
+      },
+      "predicted_at": "2025-09-05T11:54:15.130104"
+    },
+    "email_fraud_score": {
+      "model": "Email Fraud Detection",
+      "prediction": {
+        "fraud_probability": 0.08,
+        "risk_level": "LOW",
+        "confidence": 0.92
+      },
+      "features": {
+        "spf_valid": true,
+        "dkim_valid": true,
+        "domain_reputation": 0.85,
+        "content_analysis": "Normal"
+      },
+      "predicted_at": "2025-09-05T11:54:15.130121"
+    },
+    "financial_risk_score": {
+      "model": "Financial Risk Assessment",
+      "prediction": {
+        "risk_probability": 0.12,
+        "risk_level": "LOW",
+        "confidence": 0.85
+      },
+      "features": {
+        "credit_score": 720,
+        "transaction_patterns": "Normal",
+        "account_age": 1825,
+        "suspicious_activities": 0
+      },
+      "predicted_at": "2025-09-05T11:54:15.130131"
+    },
+    "crypto_risk_score": {
+      "model": "Cryptocurrency Risk Assessment",
+      "prediction": {
+        "risk_probability": 0.05,
+        "risk_level": "LOW",
+        "confidence": 0.78
+      },
+      "features": {
+        "wallet_count": 0,
+        "transaction_volume": 0,
+        "exchange_activity": "None",
+        "compliance_status": "Clear"
+      },
+      "predicted_at": "2025-09-05T11:54:15.130141"
+    },
+    "overall_risk_score": {
+      "model": "Overall Risk Assessment",
+      "prediction": {
+        "risk_probability": 0.10550000000000001,
+        "risk_level": "LOW",
+        "confidence": 0.87
+      },
+      "component_scores": {
+        "domain": 0.15,
+        "email": 0.08,
+        "financial": 0.12,
+        "crypto": 0.05
+      },
+      "weights": {
+        "domain": 0.25,
+        "email": 0.2,
+        "financial": 0.35,
+        "crypto": 0.2
+      },
+      "calculated_at": "2025-09-05T11:54:15.130146"
+    }
+  },
+  "memory_data": {
+    "investigation_history": {
+      "previous_investigations": 0,
+      "investigation_timeline": [],
+      "status_changes": [],
+      "agent_interactions": []
+    },
+    "pattern_matches": {
+      "fraud_patterns": [],
+      "behavioral_patterns": [
+        "Normal user behavior"
+      ],
+      "risk_patterns": [],
+      "compliance_patterns": [
+        "Standard compliance profile"
+      ]
+    },
+    "similar_cases": {
+      "similar_cases_count": 0,
+      "similar_cases": [],
+      "case_outcomes": [],
+      "lessons_learned": []
+    },
+    "knowledge_base": {
+      "fraud_methodologies": [
+        "Standard fraud detection methods"
+      ],
+      "investigation_techniques": [
+        "Multi-source verification"
+      ],
+      "compliance_requirements": [
+        "GDPR",
+        "CCPA"
+      ],
+      "best_practices": [
+        "Comprehensive data collection"
+      ]
+    }
+  },
+  "metadata": {
+    "investigation_id": "test_001",
+    "subject": "john.doe@example.com",
+    "investigation_type": "comprehensive",
+    "data_sources": [
+      "CrewAI Agents",
+      "OpenSanctions",
+      "Alpha Vantage",
+      "WhoisXML",
+      "Shodan",
+      "IPinfo",
+      "Cloudflare",
+      "RapidAPI",
+      "MaxMind",
+      "Companies House"
+    ],
+    "collection_timestamp": "2025-09-05T11:54:15.130249",
+    "data_quality": {
+      "completeness": 0.92,
+      "accuracy": 0.88,
+      "timeliness": 0.95
+    },
+    "processing_stats": {
+      "total_apis_called": 9,
+      "successful_calls": 9,
+      "failed_calls": 0,
+      "processing_time_seconds": 15.2
+    }
+  },
+  "collected_at": "2025-09-05T11:54:15.130254"
+}
