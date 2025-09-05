@@ -1,0 +1,206 @@
+domain_investigation:
+  description: >
+    Conduct comprehensive domain investigation for {domain}.
+    Analyze DNS records, WHOIS data, SSL certificates, and hosting
+    infrastructure to identify fraud indicators and threat attribution.
+    
+    Investigation should include:
+    - WHOIS registration details and anomaly detection
+    - DNS configuration analysis and security assessment
+    - SSL certificate examination and trust evaluation
+    - Hosting infrastructure mapping and geolocation
+    - Domain reputation and blacklist checking
+    - Registration pattern analysis for fraud indicators
+  expected_output: >
+    Detailed domain analysis report in JSON format including:
+    - WHOIS registration details with anomaly flags
+    - DNS configuration and security assessment results
+    - SSL certificate analysis with trust evaluation
+    - Hosting infrastructure and geolocation data
+    - Domain reputation scores and blacklist status
+    - Fraud risk score (0-100) with confidence level
+    - Threat indicators and attribution assessment
+    - Recommended actions and mitigation strategies
+  agent: fbi_cyber_specialist
+  tools: [whois_domain_lookup, dns_analysis, ssl_certificate_analysis]
+
+email_investigation:
+  description: >
+    Investigate email address {email} for authenticity and threat indicators.
+    Analyze email headers, reputation, domain association, and behavioral patterns.
+    
+    Investigation should include:
+    - Email header analysis and routing examination
+    - Domain reputation and trust assessment
+    - Authentication mechanism verification (SPF, DKIM, DMARC)
+    - Behavioral pattern analysis and anomaly detection
+    - Cross-reference with known threat databases
+    - Spoofing and phishing indicator identification
+  expected_output: >
+    Comprehensive email investigation report in JSON format including:
+    - Email header analysis with routing information
+    - Domain reputation and trust assessment scores
+    - Authentication status (SPF, DKIM, DMARC results)
+    - Behavioral pattern analysis results
+    - Threat indicator identification and classification
+    - Spoofing/phishing probability assessment
+    - Risk score (0-100) with confidence level
+    - Verification status and authenticity assessment
+  agent: email_specialist
+  tools: [email_header_analysis, email_reputation, authentication_check]
+
+financial_intelligence:
+  description: >
+    Conduct financial intelligence analysis on entity {entity}.
+    Investigate financial connections, sanctions status, and risk indicators.
+    
+    Analysis should include:
+    - Comprehensive sanctions screening across all major lists
+    - Financial network mapping and connection analysis
+    - Anti-money laundering (AML) risk assessment
+    - Regulatory compliance status verification
+    - Cross-reference with financial crime databases
+    - Beneficial ownership and control structure analysis
+  expected_output: >
+    Financial intelligence assessment in JSON format including:
+    - Sanctions screening results with list details
+    - Financial network analysis and connection mapping
+    - AML risk assessment with scoring methodology
+    - Regulatory compliance status and violations
+    - Financial crime database cross-reference results
+    - Beneficial ownership structure analysis
+    - Overall financial risk score (0-100)
+    - Compliance recommendations and risk mitigation
+  agent: cia_intelligence_analyst
+  tools: [sanctions_screening, financial_intelligence, aml_analysis]
+
+cryptocurrency_investigation:
+  description: >
+    Analyze cryptocurrency address {crypto_address} for illicit activities.
+    Investigate transaction patterns, wallet clustering, and compliance risks.
+    
+    Investigation should include:
+    - Blockchain transaction analysis and pattern recognition
+    - Wallet clustering and address attribution
+    - Risk assessment based on transaction history
+    - Cross-reference with known illicit addresses
+    - Compliance screening against sanctions lists
+    - Money laundering pattern detection
+  expected_output: >
+    Cryptocurrency investigation report in JSON format including:
+    - Transaction analysis with pattern identification
+    - Wallet clustering results and address attribution
+    - Risk assessment scores and methodology
+    - Illicit activity indicators and evidence
+    - Sanctions compliance screening results
+    - Money laundering risk assessment
+    - Overall crypto risk score (0-100)
+    - Recommended compliance actions
+  agent: crypto_specialist
+  tools: [blockchain_analysis, wallet_clustering, crypto_compliance]
+
+threat_assessment:
+  description: >
+    Perform comprehensive threat assessment based on investigation findings.
+    Analyze threat patterns, attribution, and strategic implications using
+    all available intelligence from previous investigation tasks.
+    
+    Assessment should include:
+    - Threat actor attribution and profiling
+    - Attack pattern and methodology analysis
+    - Strategic implications and impact assessment
+    - Confidence levels and uncertainty analysis
+    - Cross-correlation with known threat campaigns
+    - Mitigation and response strategy recommendations
+  expected_output: >
+    Strategic threat assessment in JSON format including:
+    - Threat actor attribution with confidence scores
+    - Attack pattern analysis and TTPs identification
+    - Strategic implications and potential impact
+    - Confidence assessment and uncertainty factors
+    - Correlation with known threat campaigns
+    - Threat landscape positioning and context
+    - Overall threat level (Critical/High/Medium/Low)
+    - Recommended mitigation and response strategies
+  agent: mossad_counterintel_specialist
+  tools: [threat_assessment, attribution_analysis, strategic_intelligence]
+
+intelligence_fusion:
+  description: >
+    Conduct intelligence fusion analysis combining all investigation findings.
+    Synthesize information from domain, email, financial, and threat assessments
+    to provide comprehensive intelligence picture.
+    
+    Fusion analysis should include:
+    - Cross-correlation of all investigation findings
+    - Pattern recognition across multiple data sources
+    - Confidence assessment and reliability scoring
+    - Gap analysis and information requirements
+    - Strategic context and geopolitical implications
+    - Predictive analysis and trend identification
+  expected_output: >
+    Intelligence fusion report in JSON format including:
+    - Comprehensive findings synthesis and correlation
+    - Multi-source pattern recognition results
+    - Confidence and reliability assessment matrix
+    - Information gaps and collection requirements
+    - Strategic context and implications analysis
+    - Predictive assessments and trend analysis
+    - Overall intelligence assessment and recommendations
+    - Executive summary with key findings and actions
+  agent: cia_intelligence_analyst
+  tools: [intelligence_fusion, pattern_analysis, strategic_assessment]
+
+signals_analysis:
+  description: >
+    Conduct signals intelligence analysis on communication patterns and
+    infrastructure associated with the investigation target {target}.
+    
+    Analysis should include:
+    - Communication pattern analysis and mapping
+    - Infrastructure correlation and network analysis
+    - Signal source identification and attribution
+    - Communication security assessment
+    - Pattern anomaly detection and analysis
+    - Strategic communication assessment
+  expected_output: >
+    Signals intelligence analysis report in JSON format including:
+    - Communication pattern mapping and analysis
+    - Infrastructure correlation results
+    - Signal source attribution and confidence
+    - Communication security assessment
+    - Anomaly detection results and significance
+    - Strategic communication implications
+    - SIGINT confidence assessment and reliability
+    - Recommended follow-up collection requirements
+  agent: mi6_signals_specialist
+  tools: [signals_intelligence, communication_analysis, pattern_analysis]
+
+comprehensive_report:
+  description: >
+    Generate comprehensive investigation report combining all analysis results.
+    Create executive summary, detailed findings, and actionable recommendations
+    based on all completed investigation tasks.
+    
+    Report should include:
+    - Executive summary with key findings
+    - Detailed analysis results from all investigation areas
+    - Risk assessment and scoring methodology
+    - Evidence compilation and source attribution
+    - Confidence assessment and reliability analysis
+    - Actionable recommendations and next steps
+  expected_output: >
+    Comprehensive investigation report in structured format including:
+    - Executive Summary (2-3 paragraphs)
+    - Investigation Overview and Methodology
+    - Detailed Findings by Investigation Area
+    - Risk Assessment Matrix and Scoring
+    - Evidence Summary with Source Attribution
+    - Confidence Assessment and Reliability Matrix
+    - Threat Level Assessment and Implications
+    - Actionable Recommendations and Next Steps
+    - Appendices with Technical Details
+    - Investigation Metadata and Audit Trail
+  agent: cia_intelligence_analyst
+  tools: [report_generation, evidence_compilation, risk_assessment]
+
