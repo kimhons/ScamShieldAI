@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScamShield AI - My Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #1e293b;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #667eea;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .user-plan {
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .welcome-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .welcome-title {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .protection-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #dcfce7;
+            color: #166534;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #667eea;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+
+        /* Action Cards */
+        .action-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .action-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .action-card.primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .action-card.primary:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .action-card.primary .card-icon {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .card-icon.check {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .card-icon.reports {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .card-icon.alerts {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-description {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-action {
+            background: rgba(255, 255, 255, 0.2);
+            color: inherit;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .action-card:not(.primary) .card-action {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .card-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Recent Reports Section */
+        .reports-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .view-all-btn {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s ease;
+        }
+
+        .view-all-btn:hover {
+            color: #5a67d8;
+        }
+
+        /* Report Cards */
+        .reports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .report-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid #f1f5f9;
+            transition: all 0.3s ease;
+        }
+
+        .report-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-color: #667eea;
+        }
+
+        .report-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .report-id {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        .report-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-completed {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-processing {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-pending {
+            background: #e0e7ff;
+            color: #3730a3;
+        }
+
+        .report-target {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .report-type {
+            font-size: 0.875rem;
+            color: #667eea;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .report-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-bottom: 1rem;
+        }
+
+        .report-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5a67d8;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #f8fafc;
+            color: #64748b;
+            border: 1px solid #e2e8f0;
+        }
+
+        .btn-secondary:hover {
+            background: #f1f5f9;
+        }
+
+        /* Protection Tips */
+        .tips-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .tip-card {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border-left: 4px solid #667eea;
+        }
+
+        .tip-icon {
+            font-size: 1.5rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .tip-title {
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .tip-description {
+            font-size: 0.875rem;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #64748b;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: background 0.2s ease;
+        }
+
+        .close-btn:hover {
+            background: #f1f5f9;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 80px;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* Evidence Upload Styles */
+        .evidence-categories {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .evidence-category {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: white;
+        }
+
+        .evidence-category:hover,
+        .evidence-category.active {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+
+        .upload-area {
+            border: 2px dashed #e2e8f0;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            background: #f8fafc;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .upload-area:hover,
+        .upload-area.dragover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .upload-content h4 {
+            margin: 0.5rem 0;
+            color: #1e293b;
+            font-weight: 600;
+        }
+
+        .upload-content p {
+            color: #64748b;
+            margin: 0.5rem 0;
+        }
+
+        .upload-link {
+            color: #667eea;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .upload-link:hover {
+            text-decoration: underline;
+        }
+
+        .upload-icon {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .supported-formats {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 0.5rem;
+        }
+
+        #fileInput {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        /* Links Section */
+        .links-section {
+            margin: 1rem 0;
+        }
+
+        .links-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .add-link-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .add-link-btn:hover {
+            background: #5a67d8;
+        }
+
+        .link-input-group {
+            display: grid;
+            grid-template-columns: 2fr 1fr auto;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            align-items: center;
+        }
+
+        .remove-link-btn {
+            background: #fee2e2;
+            color: #dc2626;
+            border: none;
+            border-radius: 6px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .remove-link-btn:hover {
+            background: #fecaca;
+        }
+
+        /* Uploaded Files Display */
+        .uploaded-files {
+            margin-top: 1rem;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+
+        .file-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .file-icon.image {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .file-icon.document {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .file-icon.video {
+            background: #f3e8ff;
+            color: #9333ea;
+        }
+
+        .file-icon.archive {
+            background: #f0fdf4;
+            color: #16a34a;
+        }
+
+        .file-info {
+            flex: 1;
+        }
+
+        .file-name {
+            font-weight: 500;
+            color: #1e293b;
+            margin-bottom: 0.25rem;
+        }
+
+        .file-size {
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+
+        .file-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .file-action-btn {
+            background: none;
+            border: none;
+            color: #64748b;
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .file-action-btn:hover {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .file-action-btn.delete:hover {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        /* Progress Bar */
+        .upload-progress {
+            width: 100%;
+            height: 4px;
+            background: #e2e8f0;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .upload-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        /* File Type Indicators */
+        .file-type-badge {
+            background: #f1f5f9;
+            color: #64748b;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        /* Evidence Summary */
+        .evidence-summary {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .evidence-summary h5 {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .evidence-count {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+
+        .evidence-count span {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+        }
+
+        .pricing-options {
+            display: grid;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .pricing-option {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .pricing-option:hover,
+        .pricing-option.selected {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .pricing-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-name {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .pricing-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .pricing-features {
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header {
+                padding: 1rem;
+            }
+
+            .welcome-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .quick-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .action-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .reports-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <i class="fas fa-shield-alt"></i>
+            ScamShield AI
+        </div>
+        <div class="user-info">
+            <div class="user-details">
+                <div class="user-name">Sarah Johnson</div>
+                <div class="user-plan">Premium Member</div>
+            </div>
+            <div class="user-avatar">SJ</div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Welcome Section -->
+        <section class="welcome-section fade-in-up">
+            <div class="welcome-header">
+                <h1 class="welcome-title">Welcome back, Sarah!</h1>
+                <div class="protection-status">
+                    <i class="fas fa-shield-check"></i>
+                    Protected & Secure
+                </div>
+            </div>
+            <p style="color: #64748b; font-size: 1.1rem; margin-bottom: 1.5rem;">
+                Your personal fraud protection center. Run background checks, track investigations, and stay protected from scams.
+            </p>
+            <div class="quick-stats">
+                <div class="stat-item">
+                    <span class="stat-number">7</span>
+                    <span class="stat-label">Reports Generated</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">$347</span>
+                    <span class="stat-label">Total Spent</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">Threats Detected</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Success Rate</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Action Cards -->
+        <section class="action-cards fade-in-up">
+            <div class="action-card primary pulse" onclick="openNewCheckModal()">
+                <div class="card-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3 class="card-title">Run New Background Check</h3>
+                <p class="card-description">
+                    Verify anyone's identity in seconds. Check criminal records, social media, and fraud databases.
+                </p>
+                <a href="#" class="card-action">
+                    <i class="fas fa-plus"></i>
+                    Start Investigation
+                </a>
+            </div>
+
+            <div class="action-card" onclick="scrollToReports()">
+                <div class="card-icon reports">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h3 class="card-title">View My Reports</h3>
+                <p class="card-description">
+                    Access all your investigation reports, download PDFs, and track ongoing investigations.
+                </p>
+                <a href="#" class="card-action">
+                    <i class="fas fa-eye"></i>
+                    View Reports
+                </a>
+            </div>
+
+            <div class="action-card">
+                <div class="card-icon alerts">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <h3 class="card-title">Fraud Alerts</h3>
+                <p class="card-description">
+                    Stay updated on the latest scam trends and get personalized protection recommendations.
+                </p>
+                <a href="#" class="card-action">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    View Alerts
+                </a>
+            </div>
+        </section>
+
+        <!-- Recent Reports -->
+        <section class="reports-section fade-in-up" id="reports-section">
+            <div class="section-header">
+                <h2 class="section-title">My Recent Reports</h2>
+                <a href="#" class="view-all-btn">
+                    View All Reports
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="reports-grid">
+                <div class="report-card">
+                    <div class="report-header">
+                        <span class="report-id">#RPT-2024-001847</span>
+                        <span class="report-status status-completed">Completed</span>
+                    </div>
+                    <div class="report-target">john.smith@email.com</div>
+                    <div class="report-type">Professional Investigation</div>
+                    <div class="report-meta">
+                        <span>2 hours ago</span>
+                        <span>$49.99</span>
+                    </div>
+                    <div class="report-actions">
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-download"></i>
+                            Download
+                        </a>
+                        <a href="#" class="btn btn-secondary">
+                            <i class="fas fa-eye"></i>
+                            View
+                        </a>
+                    </div>
+                </div>
+
+                <div class="report-card">
+                    <div class="report-header">
+                        <span class="report-id">#RPT-2024-001846</span>
+                        <span class="report-status status-processing">Processing</span>
+                    </div>
+                    <div class="report-target">+1-555-0123</div>
+                    <div class="report-type">Basic Investigation</div>
+                    <div class="report-meta">
+                        <span>3 hours ago</span>
+                        <span>$9.99</span>
+                    </div>
+                    <div class="report-actions">
+                        <a href="#" class="btn btn-secondary">
+                            <i class="fas fa-clock"></i>
+                            Track Progress
+                        </a>
+                    </div>
+                </div>
+
+                <div class="report-card">
+                    <div class="report-header">
+                        <span class="report-id">#RPT-2024-001845</span>
+                        <span class="report-status status-completed">Completed</span>
+                    </div>
+                    <div class="report-target">suspicious-profile.com</div>
+                    <div class="report-type">Standard Investigation</div>
+                    <div class="report-meta">
+                        <span>1 day ago</span>
+                        <span>$24.99</span>
+                    </div>
+                    <div class="report-actions">
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-download"></i>
+                            Download
+                        </a>
+                        <a href="#" class="btn btn-secondary">
+                            <i class="fas fa-eye"></i>
+                            View
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Protection Tips -->
+        <section class="tips-section fade-in-up">
+            <div class="section-header">
+                <h2 class="section-title">Stay Protected</h2>
+            </div>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-icon">💕</div>
+                    <h4 class="tip-title">Romance Scam Alert</h4>
+                    <p class="tip-description">
+                        Always verify someone's identity before sharing personal information or sending money in online relationships.
+                    </p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">💰</div>
+                    <h4 class="tip-title">Investment Fraud</h4>
+                    <p class="tip-description">
+                        Be wary of "guaranteed" high returns. Research investment opportunities and verify credentials before investing.
+                    </p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">📱</div>
+                    <h4 class="tip-title">Phone Scams</h4>
+                    <p class="tip-description">
+                        Never give personal information over the phone to unsolicited callers. Verify the caller's identity first.
+                    </p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">🔗</div>
+                    <h4 class="tip-title">Phishing Links</h4>
+                    <p class="tip-description">
+                        Don't click suspicious links in emails or texts. Always verify the sender and URL before clicking.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- New Check Modal -->
+    <div class="modal" id="newCheckModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Start New Background Check</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            
+            <form id="newCheckForm">
+                <div class="form-group">
+                    <label class="form-label">What would you like to investigate?</label>
+                    <select class="form-select" id="investigationType">
+                        <option value="email">Email Address</option>
+                        <option value="phone">Phone Number</option>
+                        <option value="name">Full Name</option>
+                        <option value="website">Website/Domain</option>
+                        <option value="social">Social Media Profile</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Enter Details</label>
+                    <input type="text" class="form-input" id="investigationTarget" placeholder="Enter email, phone, name, or URL...">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-upload"></i>
+                        Upload Supporting Evidence (Optional)
+                    </label>
+                    <p style="font-size: 0.875rem; color: #64748b; margin-bottom: 1rem;">
+                        Provide screenshots, documents, messages, or other evidence to enhance your investigation
+                    </p>
+                    
+                    <!-- Evidence Categories -->
+                    <div class="evidence-categories">
+                        <div class="evidence-category active" data-category="all">
+                            <i class="fas fa-th-large"></i>
+                            All Files
+                        </div>
+                        <div class="evidence-category" data-category="screenshots">
+                            <i class="fas fa-camera"></i>
+                            Screenshots
+                        </div>
+                        <div class="evidence-category" data-category="messages">
+                            <i class="fas fa-comments"></i>
+                            Messages
+                        </div>
+                        <div class="evidence-category" data-category="documents">
+                            <i class="fas fa-file-alt"></i>
+                            Documents
+                        </div>
+                        <div class="evidence-category" data-category="links">
+                            <i class="fas fa-link"></i>
+                            Links
+                        </div>
+                    </div>
+
+                    <!-- File Upload Area -->
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-content">
+                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                            <h4>Drag & Drop Files Here</h4>
+                            <p>or <span class="upload-link">browse files</span></p>
+                            <div class="supported-formats">
+                                <span>Supports: JPG, PNG, PDF, DOC, TXT, MP4, ZIP</span>
+                            </div>
+                        </div>
+                        <input type="file" id="fileInput" multiple accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.txt,.mp4,.mov,.zip,.rar">
+                    </div>
+
+                    <!-- Links Input -->
+                    <div class="links-section">
+                        <div class="links-header">
+                            <label class="form-label">
+                                <i class="fas fa-link"></i>
+                                Add Relevant Links
+                            </label>
+                            <button type="button" class="add-link-btn" onclick="addLinkInput()">
+                                <i class="fas fa-plus"></i>
+                                Add Link
+                            </button>
+                        </div>
+                        <div class="links-container" id="linksContainer">
+                            <div class="link-input-group">
+                                <input type="url" class="form-input" placeholder="https://suspicious-website.com">
+                                <input type="text" class="form-input" placeholder="Description (optional)">
+                                <button type="button" class="remove-link-btn" onclick="removeLinkInput(this)">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Uploaded Files Display -->
+                    <div class="uploaded-files" id="uploadedFiles">
+                        <!-- Files will be displayed here -->
+                    </div>
+
+                    <!-- Evidence Notes -->
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-sticky-note"></i>
+                            Additional Notes
+                        </label>
+                        <textarea class="form-textarea" id="evidenceNotes" rows="3" placeholder="Describe the context of your evidence, timeline of events, or any specific concerns..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Choose Investigation Level</label>
+                    <div class="pricing-options">
+                        <div class="pricing-option" onclick="selectPricing(this, 'basic')">
+                            <div class="pricing-header">
+                                <span class="pricing-name">Basic Investigation</span>
+                                <span class="pricing-price">$9.99</span>
+                            </div>
+                            <div class="pricing-features">Essential fraud detection • 24-hour delivery • PDF report</div>
+                        </div>
+                        <div class="pricing-option selected" onclick="selectPricing(this, 'standard')">
+                            <div class="pricing-header">
+                                <span class="pricing-name">Standard Investigation</span>
+                                <span class="pricing-price">$24.99</span>
+                            </div>
+                            <div class="pricing-features">Comprehensive analysis • 12-hour delivery • Multiple formats</div>
+                        </div>
+                        <div class="pricing-option" onclick="selectPricing(this, 'professional')">
+                            <div class="pricing-header">
+                                <span class="pricing-name">Professional Investigation</span>
+                                <span class="pricing-price">$49.99</span>
+                            </div>
+                            <div class="pricing-features">Expert analysis • 6-hour delivery • All formats • Phone support</div>
+                        </div>
+                        <div class="pricing-option" onclick="selectPricing(this, 'forensic')">
+                            <div class="pricing-header">
+                                <span class="pricing-name">Forensic Investigation</span>
+                                <span class="pricing-price">$99.99</span>
+                            </div>
+                            <div class="pricing-features">Court-ready documentation • 3-hour delivery • Expert testimony</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()" style="flex: 1;">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary" style="flex: 2;">
+                        <i class="fas fa-credit-card"></i>
+                        Proceed to Payment
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Modal functionality
+        function openNewCheckModal() {
+            document.getElementById('newCheckModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('newCheckModal').classList.remove('active');
+        }
+
+        function selectPricing(element, type) {
+            document.querySelectorAll('.pricing-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+
+        function scrollToReports() {
+            document.getElementById('reports-section').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+
+        // Form submission
+        document.getElementById('newCheckForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const type = document.getElementById('investigationType').value;
+            const target = document.getElementById('investigationTarget').value;
+            const selectedPricing = document.querySelector('.pricing-option.selected');
+            const uploadedFiles = document.querySelectorAll('.file-item').length;
+            const links = document.querySelectorAll('.link-input-group input[type="url"]').length;
+            const notes = document.getElementById('evidenceNotes').value;
+            
+            if (!target.trim()) {
+                alert('Please enter the details to investigate.');
+                return;
+            }
+            
+            let evidenceSummary = '';
+            if (uploadedFiles > 0 || links > 0 || notes.trim()) {
+                evidenceSummary = `\n\nEvidence provided:\n- ${uploadedFiles} files uploaded\n- ${links} links provided\n- Additional notes: ${notes ? 'Yes' : 'No'}`;
+            }
+            
+            // Simulate payment processing
+            alert(`Starting ${selectedPricing.querySelector('.pricing-name').textContent} for: ${target}${evidenceSummary}\n\nRedirecting to secure payment...`);
+            closeModal();
+            
+            // Reset form
+            document.getElementById('investigationTarget').value = '';
+            document.getElementById('evidenceNotes').value = '';
+            document.getElementById('uploadedFiles').innerHTML = '';
+            document.getElementById('linksContainer').innerHTML = `
+                <div class="link-input-group">
+                    <input type="url" class="form-input" placeholder="https://suspicious-website.com">
+                    <input type="text" class="form-input" placeholder="Description (optional)">
+                    <button type="button" class="remove-link-btn" onclick="removeLinkInput(this)">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+        });
+
+        // Evidence Upload Functionality
+        let uploadedFiles = [];
+
+        // File upload handling
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const uploadedFilesContainer = document.getElementById('uploadedFiles');
+
+        // Click to upload
+        uploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        // Drag and drop functionality
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = Array.from(e.dataTransfer.files);
+            handleFiles(files);
+        });
+
+        // File input change
+        fileInput.addEventListener('change', (e) => {
+            const files = Array.from(e.target.files);
+            handleFiles(files);
+        });
+
+        // Handle uploaded files
+        function handleFiles(files) {
+            files.forEach(file => {
+                if (validateFile(file)) {
+                    uploadedFiles.push(file);
+                    displayFile(file);
+                }
+            });
+            updateEvidenceSummary();
+        }
+
+        // Validate file type and size
+        function validateFile(file) {
+            const allowedTypes = [
+                'image/jpeg', 'image/png', 'image/gif',
+                'application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                'text/plain', 'video/mp4', 'video/quicktime',
+                'application/zip', 'application/x-rar-compressed'
+            ];
+            
+            const maxSize = 50 * 1024 * 1024; // 50MB
+            
+            if (!allowedTypes.includes(file.type)) {
+                alert(`File type not supported: ${file.name}`);
+                return false;
+            }
+            
+            if (file.size > maxSize) {
+                alert(`File too large: ${file.name}. Maximum size is 50MB.`);
+                return false;
+            }
+            
+            return true;
+        }
+
+        // Display uploaded file
+        function displayFile(file) {
+            const fileItem = document.createElement('div');
+            fileItem.className = 'file-item';
+            
+            const fileType = getFileType(file.type);
+            const fileIcon = getFileIcon(fileType);
+            const fileSize = formatFileSize(file.size);
+            
+            fileItem.innerHTML = `
+                <div class="file-icon ${fileType}">
+                    <i class="${fileIcon}"></i>
+                </div>
+                <div class="file-info">
+                    <div class="file-name">${file.name}</div>
+                    <div class="file-size">${fileSize}</div>
+                    <div class="upload-progress">
+                        <div class="upload-progress-bar" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div class="file-actions">
+                    <button type="button" class="file-action-btn" onclick="previewFile('${file.name}')">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                    <button type="button" class="file-action-btn delete" onclick="removeFile(this, '${file.name}')">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `;
+            
+            uploadedFilesContainer.appendChild(fileItem);
+            
+            // Simulate upload progress
+            const progressBar = fileItem.querySelector('.upload-progress-bar');
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 30;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    fileItem.querySelector('.upload-progress').style.display = 'none';
+                }
+                progressBar.style.width = progress + '%';
+            }, 200);
+        }
+
+        // Get file type category
+        function getFileType(mimeType) {
+            if (mimeType.startsWith('image/')) return 'image';
+            if (mimeType.startsWith('video/')) return 'video';
+            if (mimeType.includes('zip') || mimeType.includes('rar')) return 'archive';
+            return 'document';
+        }
+
+        // Get file icon
+        function getFileIcon(fileType) {
+            const icons = {
+                image: 'fas fa-image',
+                video: 'fas fa-video',
+                document: 'fas fa-file-alt',
+                archive: 'fas fa-file-archive'
+            };
+            return icons[fileType] || 'fas fa-file';
+        }
+
+        // Format file size
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // Remove file
+        function removeFile(button, fileName) {
+            const fileItem = button.closest('.file-item');
+            fileItem.remove();
+            
+            // Remove from uploadedFiles array
+            uploadedFiles = uploadedFiles.filter(file => file.name !== fileName);
+            updateEvidenceSummary();
+        }
+
+        // Preview file (placeholder)
+        function previewFile(fileName) {
+            alert(`Preview functionality for ${fileName} would open here.`);
+        }
+
+        // Evidence category filtering
+        document.querySelectorAll('.evidence-category').forEach(category => {
+            category.addEventListener('click', function() {
+                document.querySelectorAll('.evidence-category').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                
+                const categoryType = this.dataset.category;
+                filterFiles(categoryType);
+            });
+        });
+
+        // Filter files by category
+        function filterFiles(category) {
+            const fileItems = document.querySelectorAll('.file-item');
+            fileItems.forEach(item => {
+                if (category === 'all') {
+                    item.style.display = 'flex';
+                } else {
+                    const fileIcon = item.querySelector('.file-icon');
+                    const shouldShow = fileIcon.classList.contains(category) || 
+                                     (category === 'screenshots' && fileIcon.classList.contains('image'));
+                    item.style.display = shouldShow ? 'flex' : 'none';
+                }
+            });
+        }
+
+        // Links management
+        function addLinkInput() {
+            const linksContainer = document.getElementById('linksContainer');
+            const linkGroup = document.createElement('div');
+            linkGroup.className = 'link-input-group';
+            linkGroup.innerHTML = `
+                <input type="url" class="form-input" placeholder="https://suspicious-website.com">
+                <input type="text" class="form-input" placeholder="Description (optional)">
+                <button type="button" class="remove-link-btn" onclick="removeLinkInput(this)">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            linksContainer.appendChild(linkGroup);
+        }
+
+        function removeLinkInput(button) {
+            const linkGroup = button.closest('.link-input-group');
+            linkGroup.remove();
+        }
+
+        // Update evidence summary
+        function updateEvidenceSummary() {
+            const existingSummary = document.querySelector('.evidence-summary');
+            if (existingSummary) {
+                existingSummary.remove();
+            }
+            
+            if (uploadedFiles.length > 0) {
+                const summary = document.createElement('div');
+                summary.className = 'evidence-summary';
+                
+                const fileTypes = {
+                    image: uploadedFiles.filter(f => f.type.startsWith('image/')).length,
+                    document: uploadedFiles.filter(f => !f.type.startsWith('image/') && !f.type.startsWith('video/')).length,
+                    video: uploadedFiles.filter(f => f.type.startsWith('video/')).length
+                };
+                
+                summary.innerHTML = `
+                    <h5>
+                        <i class="fas fa-clipboard-list"></i>
+                        Evidence Summary
+                    </h5>
+                    <div class="evidence-count">
+                        <span><i class="fas fa-image"></i> ${fileTypes.image} Images</span>
+                        <span><i class="fas fa-file-alt"></i> ${fileTypes.document} Documents</span>
+                        <span><i class="fas fa-video"></i> ${fileTypes.video} Videos</span>
+                        <span><i class="fas fa-files-o"></i> ${uploadedFiles.length} Total Files</span>
+                    </div>
+                `;
+                
+                uploadedFilesContainer.appendChild(summary);
+            }
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('newCheckModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Animate elements on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.fade-in-up');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Initialize animations
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Run on load
+
+        // Simulate real-time updates
+        function updateReportStatus() {
+            const processingReports = document.querySelectorAll('.status-processing');
+            processingReports.forEach(status => {
+                // Simulate progress updates
+                const progress = ['Processing', 'Analyzing', 'Finalizing', 'Completed'];
+                const currentIndex = progress.indexOf(status.textContent);
+                if (currentIndex < progress.length - 1 && Math.random() > 0.7) {
+                    status.textContent = progress[currentIndex + 1];
+                    if (status.textContent === 'Completed') {
+                        status.className = 'report-status status-completed';
+                    }
+                }
+            });
+        }
+
+        // Update report status every 30 seconds
+        setInterval(updateReportStatus, 30000);
+
+        // Add notification for new features
+        setTimeout(() => {
+            if (Math.random() > 0.5) {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: linear-gradient(135deg, #667eea, #764ba2);
+                    color: white;
+                    padding: 1rem 1.5rem;
+                    border-radius: 10px;
+                    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+                    z-index: 1001;
+                    animation: slideInRight 0.5s ease-out;
+                `;
+                notification.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-bell"></i>
+                        <span>New fraud alert: Romance scam activity increased 23%</span>
+                        <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: white; margin-left: 1rem; cursor: pointer;">&times;</button>
+                    </div>
+                `;
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    if (notification.parentElement) {
+                        notification.remove();
+                    }
+                }, 5000);
+            }
+        }, 3000);
+
+        // Add CSS for slide-in animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+

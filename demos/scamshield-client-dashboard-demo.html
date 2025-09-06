@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScamShield AI - Client Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Client Dashboard Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .client-dashboard {
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .dashboard-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .user-welcome h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .user-welcome p {
+            margin: 0.25rem 0 0 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .notifications-btn {
+            position: relative;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: background 0.2s ease;
+        }
+
+        .notifications-btn:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .notification-count {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #ef4444;
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.4rem;
+            border-radius: 10px;
+            min-width: 18px;
+            text-align: center;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .user-menu:hover {
+            background: rgba(102, 126, 234, 0.15);
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Tabs */
+        .dashboard-tabs {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0 2rem;
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .tab {
+            background: none;
+            border: none;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab:hover {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .new-order-tab {
+            background: #10b981;
+            color: white;
+            border-radius: 8px 8px 0 0;
+            margin-left: auto;
+        }
+
+        .new-order-tab:hover {
+            background: #059669;
+            color: white;
+        }
+
+        /* Content */
+        .dashboard-content {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 12px;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.25rem;
+        }
+
+        /* Recent Activity */
+        .recent-activity {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .recent-activity h2 {
+            margin: 0 0 1rem 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            transition: background 0.2s ease;
+        }
+
+        .activity-item:hover {
+            background: #f1f5f9;
+        }
+
+        .activity-icon {
+            font-size: 1.5rem;
+            width: 40px;
+            text-align: center;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+
+        .activity-details {
+            font-size: 0.9rem;
+            color: #666;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 0.25rem;
+        }
+
+        .activity-time {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        .download-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.2s ease;
+        }
+
+        .download-btn:hover {
+            background: #059669;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .quick-actions h2 {
+            margin: 0 0 1rem 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .action-card {
+            background: #f8fafc;
+            border: 2px solid transparent;
+            padding: 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .action-card:hover {
+            border-color: #667eea;
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        .action-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .action-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .action-description {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Status Badges */
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .status-completed { background: #d1fae5; color: #065f46; }
+        .status-processing { background: #dbeafe; color: #1e40af; }
+        .status-pending { background: #fef3c7; color: #92400e; }
+
+        /* Orders Tab */
+        .tab-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .tab-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .orders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .order-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .order-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .order-id {
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            color: #6b7280;
+            font-weight: 600;
+        }
+
+        .order-target {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .order-details {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .order-type, .order-tier {
+            background: #f3f4f6;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: capitalize;
+        }
+
+        .order-price {
+            font-weight: 600;
+            color: #059669;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dashboard-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .dashboard-tabs {
+                overflow-x: auto;
+                padding: 0 1rem;
+            }
+            
+            .dashboard-content {
+                padding: 1rem;
+            }
+            
+            .quick-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .orders-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="client-dashboard">
+        <div class="dashboard-header">
+            <div class="user-welcome">
+                <h1>Welcome back, John Doe</h1>
+                <p>TechCorp Inc • Member since Jan 15, 2024</p>
+            </div>
+            <div class="header-actions">
+                <div class="notifications-dropdown">
+                    <button class="notifications-btn">
+                        🔔 
+                        <span class="notification-count">2</span>
+                    </button>
+                </div>
+                <div class="user-menu">
+                    <div class="user-avatar">J</div>
+                    <span>John Doe</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-tabs">
+            <button class="tab active" onclick="showTab('dashboard')">📊 Dashboard</button>
+            <button class="tab" onclick="showTab('orders')">📋 My Orders</button>
+            <button class="tab" onclick="showTab('reports')">📄 Reports</button>
+            <button class="tab" onclick="showTab('account')">⚙️ Account</button>
+            <button class="tab new-order-tab" onclick="alert('New Investigation form would open')">➕ New Investigation</button>
+        </div>
+
+        <div class="dashboard-content">
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content active">
+                <div class="quick-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-content">
+                            <div class="stat-value">12</div>
+                            <div class="stat-label">Total Investigations</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-content">
+                            <div class="stat-value">$487.50</div>
+                            <div class="stat-label">Total Spent</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-content">
+                            <div class="stat-value">150</div>
+                            <div class="stat-label">Available Credits</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">🎯</div>
+                        <div class="stat-content">
+                            <div class="stat-value">94.7%</div>
+                            <div class="stat-label">Avg Accuracy</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h2>Recent Activity</h2>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon">✅</div>
+                            <div class="activity-content">
+                                <div class="activity-title">Investigation of suspicious-crypto.com</div>
+                                <div class="activity-details">
+                                    <span>professional tier</span>
+                                    <span>$49.99</span>
+                                    <span class="status-badge status-completed">completed</span>
+                                </div>
+                                <div class="activity-time">Sep 5, 2024, 10:30 AM</div>
+                            </div>
+                            <button class="download-btn" onclick="alert('Downloading report...')">📥 Download</button>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon">🔄</div>
+                            <div class="activity-content">
+                                <div class="activity-title">Investigation of phishing-email@fake.com</div>
+                                <div class="activity-details">
+                                    <span>standard tier</span>
+                                    <span>$24.99</span>
+                                    <span class="status-badge status-processing">processing</span>
+                                </div>
+                                <div class="activity-time">Sep 5, 2024, 11:15 AM</div>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon">⏳</div>
+                            <div class="activity-content">
+                                <div class="activity-title">Investigation of fake-exchange.io</div>
+                                <div class="activity-details">
+                                    <span>basic tier</span>
+                                    <span>$9.99</span>
+                                    <span class="status-badge status-pending">pending</span>
+                                </div>
+                                <div class="activity-time">Sep 5, 2024, 12:00 PM</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <h2>Quick Actions</h2>
+                    <div class="actions-grid">
+                        <div class="action-card" onclick="alert('New Investigation form would open')">
+                            <div class="action-icon">🔍</div>
+                            <div class="action-title">New Investigation</div>
+                            <div class="action-description">Start a new fraud investigation</div>
+                        </div>
+                        
+                        <div class="action-card" onclick="showTab('reports')">
+                            <div class="action-icon">📄</div>
+                            <div class="action-title">View Reports</div>
+                            <div class="action-description">Access your completed reports</div>
+                        </div>
+                        
+                        <div class="action-card" onclick="showTab('account')">
+                            <div class="action-icon">⚙️</div>
+                            <div class="action-title">Account Settings</div>
+                            <div class="action-description">Manage your account preferences</div>
+                        </div>
+                        
+                        <div class="action-card" onclick="alert('Support chat would open')">
+                            <div class="action-icon">💬</div>
+                            <div class="action-title">Support</div>
+                            <div class="action-description">Get help from our experts</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orders Tab -->
+            <div id="orders" class="tab-content">
+                <div class="tab-header">
+                    <h2>My Orders</h2>
+                </div>
+
+                <div class="orders-grid">
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-id">ORD-2024-001</div>
+                            <div class="order-status"><span class="status-badge status-completed">completed</span></div>
+                        </div>
+                        
+                        <div class="order-content">
+                            <div class="order-target"><strong>Target:</strong> suspicious-crypto.com</div>
+                            <div class="order-details">
+                                <span class="order-type">comprehensive</span>
+                                <span class="order-tier">professional</span>
+                                <span class="order-price">$49.99</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-id">ORD-2024-002</div>
+                            <div class="order-status"><span class="status-badge status-processing">processing</span></div>
+                        </div>
+                        
+                        <div class="order-content">
+                            <div class="order-target"><strong>Target:</strong> phishing-email@fake.com</div>
+                            <div class="order-details">
+                                <span class="order-type">email</span>
+                                <span class="order-tier">standard</span>
+                                <span class="order-price">$24.99</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-id">ORD-2024-003</div>
+                            <div class="order-status"><span class="status-badge status-pending">pending</span></div>
+                        </div>
+                        
+                        <div class="order-content">
+                            <div class="order-target"><strong>Target:</strong> fake-exchange.io</div>
+                            <div class="order-details">
+                                <span class="order-type">domain</span>
+                                <span class="order-tier">basic</span>
+                                <span class="order-price">$9.99</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other tabs content -->
+            <div id="reports" class="tab-content">
+                <div class="tab-header">
+                    <h2>My Reports</h2>
+                </div>
+                <p style="color: white; text-align: center; padding: 2rem;">Reports interface would be implemented here...</p>
+            </div>
+
+            <div id="account" class="tab-content">
+                <div class="tab-header">
+                    <h2>Account Settings</h2>
+                </div>
+                <p style="color: white; text-align: center; padding: 2rem;">Account settings interface would be implemented here...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab:not(.new-order-tab)');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
+

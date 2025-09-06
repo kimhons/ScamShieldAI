@@ -1,0 +1,36 @@
+{
+  "timestamp": "2025-09-05T16:48:35.371406",
+  "test_results": {
+    "API Health Check": false,
+    "Pricing System": true,
+    "Payment Processing": true,
+    "CrewAI Integration": false,
+    "Order Creation": true,
+    "Order Tracking": true,
+    "Report Generation": true,
+    "Customer Orders": true
+  },
+  "summary": {
+    "total_tests": 8,
+    "passed_tests": 6,
+    "failed_tests": 2,
+    "success_rate": 75.0,
+    "overall_status": "NEEDS_ATTENTION"
+  },
+  "api_health": {
+    "Integrated API": {
+      "status": "healthy",
+      "service": "ScamShield AI Integrated API",
+      "version": "2.0.0"
+    },
+    "Payment API": {
+      "status": "healthy",
+      "service": "ScamShield AI Payment API",
+      "version": "1.0.0"
+    },
+    "CrewAI API": {
+      "status": "error",
+      "error": "Expecting value: line 2 column 5 (char 5)"
+    }
+  }
+}

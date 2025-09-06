@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScamShield AI - Order Tracking Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 2rem;
+        }
+
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+        }
+
+        .demo-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .demo-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Order Cards Grid */
+        .orders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .order-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .order-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .order-id {
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            color: #6b7280;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-pending { background: #fef3c7; color: #92400e; }
+        .status-processing { background: #dbeafe; color: #1e40af; }
+        .status-generating { background: #fed7aa; color: #9a3412; }
+        .status-completed { background: #d1fae5; color: #065f46; }
+
+        .order-content {
+            margin-bottom: 1.5rem;
+        }
+
+        .order-target {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .order-details {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .detail-tag {
+            background: #f3f4f6;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .progress-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .progress-percentage {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #f1f5f9;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .order-date {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+
+        .track-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .track-btn:hover {
+            background: #5a67d8;
+            transform: translateY(-1px);
+        }
+
+        /* Features Section */
+        .features-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .features-section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #374151;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: #667eea;
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-description {
+            font-size: 0.9rem;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        /* Order Tracker Modal Styles */
+        .order-tracker-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 1rem;
+            display: none;
+        }
+
+        .order-tracker-modal {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .tracker-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 16px 16px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tracker-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .tracker-content {
+            padding: 2rem;
+        }
+
+        .demo-tracker-info {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .demo-tracker-info p {
+            color: #0369a1;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .demo-header h1 {
+                font-size: 2rem;
+            }
+            
+            .orders-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .order-card {
+                padding: 1.5rem;
+            }
+            
+            .order-actions {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+            
+            .track-btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1>🔍 ScamShield AI Order Tracking</h1>
+            <p>Real-time investigation progress monitoring with detailed status updates</p>
+        </div>
+
+        <div class="orders-grid">
+            <!-- Pending Payment Order -->
+            <div class="order-card" onclick="showTracker('pending')">
+                <div class="order-header">
+                    <div class="order-id">ORD-2024-001</div>
+                    <div class="status-badge status-pending">Pending Payment</div>
+                </div>
+                <div class="order-content">
+                    <div class="order-target">suspicious-crypto-exchange.com</div>
+                    <div class="order-details">
+                        <span class="detail-tag">Professional Tier</span>
+                        <span class="detail-tag">Comprehensive</span>
+                        <span class="detail-tag">$49.99</span>
+                    </div>
+                    <div class="progress-section">
+                        <div class="progress-label">
+                            <span class="progress-text">Awaiting Payment</span>
+                            <span class="progress-percentage">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-actions">
+                    <div class="order-date">Created: Sep 5, 2024</div>
+                    <button class="track-btn">Track Order</button>
+                </div>
+            </div>
+
+            <!-- In Progress Order -->
+            <div class="order-card" onclick="showTracker('processing')">
+                <div class="order-header">
+                    <div class="order-id">ORD-2024-002</div>
+                    <div class="status-badge status-processing">Investigation In Progress</div>
+                </div>
+                <div class="order-content">
+                    <div class="order-target">phishing-email@fake-bank.com</div>
+                    <div class="order-details">
+                        <span class="detail-tag">Standard Tier</span>
+                        <span class="detail-tag">Email Analysis</span>
+                        <span class="detail-tag">$24.99</span>
+                    </div>
+                    <div class="progress-section">
+                        <div class="progress-label">
+                            <span class="progress-text">AI Agents Investigating</span>
+                            <span class="progress-percentage">65%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 65%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-actions">
+                    <div class="order-date">Started: Sep 5, 2024</div>
+                    <button class="track-btn">Track Order</button>
+                </div>
+            </div>
+
+            <!-- Report Generation Order -->
+            <div class="order-card" onclick="showTracker('generating')">
+                <div class="order-header">
+                    <div class="order-id">ORD-2024-003</div>
+                    <div class="status-badge status-generating">Generating Report</div>
+                </div>
+                <div class="order-content">
+                    <div class="order-target">fake-investment-platform.net</div>
+                    <div class="order-details">
+                        <span class="detail-tag">Forensic Tier</span>
+                        <span class="detail-tag">Court-Ready</span>
+                        <span class="detail-tag">$99.99</span>
+                    </div>
+                    <div class="progress-section">
+                        <div class="progress-label">
+                            <span class="progress-text">Creating Report</span>
+                            <span class="progress-percentage">85%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-actions">
+                    <div class="order-date">ETA: 30 minutes</div>
+                    <button class="track-btn">Track Order</button>
+                </div>
+            </div>
+
+            <!-- Completed Order -->
+            <div class="order-card" onclick="showTracker('completed')">
+                <div class="order-header">
+                    <div class="order-id">ORD-2024-004</div>
+                    <div class="status-badge status-completed">Report Ready</div>
+                </div>
+                <div class="order-content">
+                    <div class="order-target">scam-marketplace.onion</div>
+                    <div class="order-details">
+                        <span class="detail-tag">Professional Tier</span>
+                        <span class="detail-tag">Dark Web</span>
+                        <span class="detail-tag">$49.99</span>
+                    </div>
+                    <div class="progress-section">
+                        <div class="progress-label">
+                            <span class="progress-text">Investigation Complete</span>
+                            <span class="progress-percentage">100%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-actions">
+                    <div class="order-date">Completed: Sep 5, 2024</div>
+                    <button class="track-btn">Download Report</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h2>🚀 Advanced Order Tracking Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-title">Real-Time Progress</div>
+                    <div class="feature-description">Live updates on investigation progress with detailed milestone tracking</div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <div class="feature-title">AI Agent Monitoring</div>
+                    <div class="feature-description">Track individual AI agents as they analyze different aspects of your target</div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <div class="feature-title">Multi-Device Access</div>
+                    <div class="feature-description">Access your order status from any device with secure authentication</div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📧</div>
+                    <div class="feature-title">Smart Notifications</div>
+                    <div class="feature-description">Receive email and SMS updates at key investigation milestones</div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📄</div>
+                    <div class="feature-title">Multi-Format Reports</div>
+                    <div class="feature-description">Download reports in PDF, HTML, JSON, and other formats</div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-title">Secure Delivery</div>
+                    <div class="feature-description">Encrypted report delivery with access codes and expiration dates</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Tracker Modal -->
+    <div id="orderTracker" class="order-tracker-overlay">
+        <div class="order-tracker-modal">
+            <div class="tracker-header">
+                <h2 id="trackerTitle">🔍 Order Tracking</h2>
+                <button class="close-btn" onclick="closeTracker()">✕</button>
+            </div>
+            <div class="tracker-content">
+                <div class="demo-tracker-info">
+                    <p>🎯 This is a demo of the order tracking interface. In production, this would connect to live API data.</p>
+                </div>
+                <div id="trackerContent">
+                    <!-- Dynamic content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTracker(orderType) {
+            const tracker = document.getElementById('orderTracker');
+            const content = document.getElementById('trackerContent');
+            const title = document.getElementById('trackerTitle');
+            
+            // Set title based on order type
+            const titles = {
+                'pending': '💳 Payment Pending',
+                'processing': '🔍 Investigation in Progress',
+                'generating': '📄 Generating Report',
+                'completed': '✅ Investigation Complete'
+            };
+            
+            title.textContent = titles[orderType] || '🔍 Order Tracking';
+            
+            // Generate demo content based on order type
+            content.innerHTML = generateTrackerContent(orderType);
+            
+            // Show the modal
+            tracker.style.display = 'flex';
+            
+            // Prevent body scroll
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeTracker() {
+            const tracker = document.getElementById('orderTracker');
+            tracker.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function generateTrackerContent(orderType) {
+            const baseContent = `
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="margin-bottom: 1rem; color: #374151;">Order Summary</h3>
+                    <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; border: 1px solid #e2e8f0;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <div><strong>Order ID:</strong> ORD-2024-${Math.floor(Math.random() * 999) + 1}</div>
+                            <div><strong>Target:</strong> ${getRandomTarget()}</div>
+                            <div><strong>Tier:</strong> Professional</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            const statusContent = {
+                'pending': `
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="margin-bottom: 1rem; color: #374151;">Payment Status</h3>
+                        <div style="background: #fef3c7; border: 1px solid #f59e0b; padding: 1rem; border-radius: 8px;">
+                            <p style="color: #92400e; margin: 0;">⏳ Waiting for payment confirmation. Please complete your payment to start the investigation.</p>
+                        </div>
+                    </div>
+                `,
+                'processing': `
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="margin-bottom: 1rem; color: #374151;">Investigation Progress</h3>
+                        <div style="background: #dbeafe; border: 1px solid #3b82f6; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                            <p style="color: #1e40af; margin: 0;">🔍 AI agents are actively investigating your target. Progress: 65%</p>
+                        </div>
+                        <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; border: 1px solid #e2e8f0;">
+                            <h4 style="margin: 0 0 0.5rem 0;">Active Agents:</h4>
+                            <ul style="margin: 0; padding-left: 1.5rem;">
+                                <li>🌐 Web Intelligence Agent - Analyzing domain structure</li>
+                                <li>🔒 Security Assessment Agent - Checking SSL certificates</li>
+                                <li>📊 Risk Analysis Agent - Evaluating threat indicators</li>
+                                <li>🎯 Attribution Agent - Identifying threat actors</li>
+                            </ul>
+                        </div>
+                    </div>
+                `,
+                'generating': `
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="margin-bottom: 1rem; color: #374151;">Report Generation</h3>
+                        <div style="background: #fed7aa; border: 1px solid #f97316; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                            <p style="color: #9a3412; margin: 0;">📄 Creating comprehensive report with findings and recommendations. Progress: 85%</p>
+                        </div>
+                        <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; border: 1px solid #e2e8f0;">
+                            <h4 style="margin: 0 0 0.5rem 0;">Report Sections:</h4>
+                            <ul style="margin: 0; padding-left: 1.5rem;">
+                                <li>✅ Executive Summary</li>
+                                <li>✅ Technical Analysis</li>
+                                <li>✅ Risk Assessment</li>
+                                <li>🔄 Recommendations (In Progress)</li>
+                                <li>⏳ Appendices (Pending)</li>
+                            </ul>
+                        </div>
+                    </div>
+                `,
+                'completed': `
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="margin-bottom: 1rem; color: #374151;">Investigation Results</h3>
+                        <div style="background: #d1fae5; border: 1px solid #10b981; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                            <p style="color: #065f46; margin: 0;">✅ Investigation complete! Your comprehensive report is ready for download.</p>
+                        </div>
+                        <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 1rem;">
+                            <h4 style="margin: 0 0 0.5rem 0;">Key Findings:</h4>
+                            <ul style="margin: 0; padding-left: 1.5rem;">
+                                <li>🚨 High Risk Level Detected</li>
+                                <li>📊 95.7% Confidence Score</li>
+                                <li>🔍 12 Threat Indicators Found</li>
+                                <li>⚠️ Active Phishing Campaign</li>
+                            </ul>
+                        </div>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <button onclick="alert('PDF download started')" style="background: #dc2626; color: white; border: none; padding: 0.75rem 1rem; border-radius: 6px; cursor: pointer;">📄 Download PDF</button>
+                            <button onclick="alert('HTML report opened')" style="background: #059669; color: white; border: none; padding: 0.75rem 1rem; border-radius: 6px; cursor: pointer;">🌐 View HTML</button>
+                            <button onclick="alert('JSON data downloaded')" style="background: #d97706; color: white; border: none; padding: 0.75rem 1rem; border-radius: 6px; cursor: pointer;">📊 Get JSON</button>
+                        </div>
+                    </div>
+                `
+            };
+
+            return baseContent + (statusContent[orderType] || '');
+        }
+
+        function getRandomTarget() {
+            const targets = [
+                'suspicious-crypto-exchange.com',
+                'phishing-email@fake-bank.com',
+                'fake-investment-platform.net',
+                'scam-marketplace.onion',
+                'fraudulent-trading-bot.io'
+            ];
+            return targets[Math.floor(Math.random() * targets.length)];
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('orderTracker').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeTracker();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeTracker();
+            }
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScamShield AI - Advanced Fraud Detection & Investigation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            z-index: -2;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            color: white;
+            z-index: 10;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            animation: slideInUp 1s ease-out;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            animation: slideInUp 1s ease-out 0.1s both;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .highlight {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            display: inline-block;
+            margin: 0.2rem;
+            font-weight: 700;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: slideInUp 1s ease-out 0.2s both;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            line-height: 1.6;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .urgency-text {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 0.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        .trust-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            animation: slideInUp 1s ease-out 0.3s both;
+            flex-wrap: wrap;
+        }
+
+        .trust-item {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .trust-number {
+            display: block;
+            font-size: 2rem;
+            font-weight: 900;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .trust-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            opacity: 0.9;
+            margin-top: 0.3rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            animation: slideInUp 1s ease-out 0.2s both;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: slideInUp 1s ease-out 0.4s both;
+        }
+
+        .hero-button {
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button-subtext {
+            font-size: 0.8rem;
+            font-weight: 400;
+            opacity: 0.8;
+            margin-top: 0.3rem;
+        }
+
+        .hero-button.primary {
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-button.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-button.primary:hover {
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-proof {
+            margin-top: 2rem;
+            animation: slideInUp 1s ease-out 0.5s both;
+            text-align: center;
+        }
+
+        .social-proof p {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .testimonial {
+            font-style: italic;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            border-left: 4px solid #ffd700;
+            margin-top: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 4rem 2rem;
+            margin: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stats-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .stats-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            counter-reset: number;
+            animation: countUp 2s ease-out;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Threat Alert Banner */
+        .threat-banner {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            margin: 2rem;
+            border-radius: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        /* Background Check Section */
+        .background-check-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            margin: 2rem;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .background-check-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        .background-check-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .background-check-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .background-check-text h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .background-check-text h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .check-features {
+            margin: 2rem 0;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .check-icon {
+            font-size: 1.2rem;
+            margin-right: 1rem;
+            min-width: 30px;
+        }
+
+        .check-text {
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .urgency-stats {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .urgency-stat {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            flex: 1;
+        }
+
+        .stat-big {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .stat-small {
+            display: block;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+
+        .background-check-cta {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            padding: 1.5rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-top: 1rem;
+        }
+
+        .background-check-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            background: white;
+        }
+
+        .cta-subtext {
+            font-size: 0.8rem;
+            font-weight: 400;
+            opacity: 0.7;
+            margin-top: 0.3rem;
+        }
+
+        .phone-mockup {
+            background: #333;
+            border-radius: 25px;
+            padding: 1rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .phone-screen {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            color: #333;
+        }
+
+        .search-bar {
+            background: #f5f5f5;
+            padding: 1rem;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border: 2px solid #667eea;
+        }
+
+        .search-icon {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .search-text {
+            color: #666;
+            font-style: italic;
+        }
+
+        .results-preview {
+            space-y: 1rem;
+        }
+
+        .result-item {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem;
+            border-radius: 10px;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+
+        .result-item.verified {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .result-item.warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .result-item.danger {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .result-icon {
+            margin-right: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            margin: 2rem;
+            border-radius: 20px;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .features-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .feature-benefits {
+            list-style: none;
+        }
+
+        .feature-benefits li {
+            color: #555;
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .feature-benefits li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            margin: 2rem;
+            border-radius: 20px;
+        }
+
+        .pricing-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .pricing-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .freemium-explanation {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .freemium-step {
+            display: flex;
+            align-items: center;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 1rem 1.5rem;
+            border-radius: 25px;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-right: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .step-text {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.2);
+        }
+
+        .pricing-card.featured {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.08) translateY(-5px);
+        }
+
+        .pricing-badge {
+            background: #10b981;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .pricing-tier {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-period {
+            opacity: 0.7;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .pricing-card.featured .pricing-features li::before {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .pricing-button {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card:not(.featured) .pricing-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .pricing-card.featured .pricing-button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .pricing-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 2rem;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 10;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            color: white;
+            padding: 3rem 2rem 2rem;
+            margin-top: 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #667eea;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .highlight {
+                display: block;
+                margin: 0.5rem auto;
+                text-align: center;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .trust-indicators {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .background-check-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .background-check-text h2 {
+                font-size: 2rem;
+            }
+
+            .urgency-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .freemium-explanation {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+
+            .freemium-step {
+                max-width: 300px;
+                text-align: center;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+            }
+
+            .pricing-card.featured:hover {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+    
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav">
+            <div class="logo">🛡️ ScamShield AI</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#get-started" class="cta-button">Get Started</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Stop Scams & Verify Anyone Before They Strike</h1>
+            <div class="hero-subtitle">
+                <span class="highlight">Background Checks</span> + <span class="highlight">Fraud Detection</span> + <span class="highlight">AI Investigation</span>
+            </div>
+            <p class="hero-description">
+                <strong>Don't be the next victim!</strong> In the time it takes to read this, 47 people will be scammed. 
+                Our AI-powered platform combines <strong>instant background verification</strong> with <strong>advanced fraud detection</strong> 
+                to protect you from romance scams, investment fraud, and identity theft. 
+                <span class="urgency-text">⚡ Results typically in 15-60 seconds!</span>
+            </p>
+            <div class="trust-indicators">
+                <div class="trust-item">
+                    <span class="trust-number">2.3M+</span>
+                    <span class="trust-label">People Protected</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-number">99.7%</span>
+                    <span class="trust-label">Accuracy Rate</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-number">$847M</span>
+                    <span class="trust-label">Fraud Prevented</span>
+                </div>
+            </div>
+            <div class="hero-buttons">
+                <a href="#get-started" class="hero-button primary">
+                    🔍 Sign Up Free - Start Checking
+                    <span class="button-subtext">No Credit Card • Pay Only for Reports</span>
+                </a>
+                <a href="#features" class="hero-button secondary">
+                    📊 See Live Demo
+                    <span class="button-subtext">Watch AI in Action</span>
+                </a>
+            </div>
+            <div class="social-proof">
+                <p>⭐⭐⭐⭐⭐ <strong>4.9/5 stars</strong> from 50,000+ verified users</p>
+                <p class="testimonial">"ScamShield saved me from a $50,000 romance scam!" - Sarah M., Verified User</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Threat Alert Banner -->
+    <div class="threat-banner fade-in">
+        <strong>🚨 BREAKING:</strong> Romance scams hit record $1.3B in losses this year. 
+        <strong>Background check anyone in 15 seconds</strong> before sharing personal info or money. 
+        <span style="background: rgba(255,255,255,0.2); padding: 0.3rem 0.8rem; border-radius: 15px; margin-left: 1rem;">
+            ⏰ Every 6 minutes someone loses $10,000+ to online fraud
+        </span>
+    </div>
+
+    <!-- Stats Section -->
+    <section class="stats-section fade-in">
+        <div class="stats-container">
+            <div class="stats-header">
+                <h2>The Scam Epidemic</h2>
+                <p>Real-time statistics showing the urgent need for advanced fraud protection</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-number" data-target="56">0</div>
+                    <div class="stat-label">Billion Lost to Scams (2024)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📈</div>
+                    <div class="stat-number" data-target="847">0</div>
+                    <div class="stat-label">% Increase in Scam Attempts</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-number" data-target="2.8">0</div>
+                    <div class="stat-label">Million People Scammed Daily</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-number" data-target="15">0</div>
+                    <div class="stat-label">Seconds to Detect with AI</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Background Check Feature Highlight -->
+    <section class="background-check-section fade-in">
+        <div class="background-check-container">
+            <div class="background-check-content">
+                <div class="background-check-text">
+                    <h2>🔍 Instant Background Verification</h2>
+                    <h3>Know Who You're Really Talking To</h3>
+                    <p class="feature-description">
+                        Before you share personal information, send money, or meet someone online, 
+                        <strong>verify their identity in seconds</strong>. Our AI scans millions of records to reveal:
+                    </p>
+                    <div class="check-features">
+                        <div class="check-item">
+                            <span class="check-icon">✅</span>
+                            <span class="check-text"><strong>Criminal Records</strong> - Arrests, convictions, warrants</span>
+                        </div>
+                        <div class="check-item">
+                            <span class="check-icon">✅</span>
+                            <span class="check-text"><strong>Social Media Verification</strong> - Real profiles vs fake accounts</span>
+                        </div>
+                        <div class="check-item">
+                            <span class="check-icon">✅</span>
+                            <span class="check-text"><strong>Financial History</strong> - Bankruptcies, liens, judgments</span>
+                        </div>
+                        <div class="check-item">
+                            <span class="check-icon">✅</span>
+                            <span class="check-text"><strong>Address Verification</strong> - Current and previous locations</span>
+                        </div>
+                        <div class="check-item">
+                            <span class="check-icon">✅</span>
+                            <span class="check-text"><strong>Professional Licenses</strong> - Verify claimed credentials</span>
+                        </div>
+                        <div class="check-item">
+                            <span class="check-icon">✅</span>
+                            <span class="check-text"><strong>Scam Database Match</strong> - Known fraud patterns & aliases</span>
+                        </div>
+                    </div>
+                    <div class="urgency-stats">
+                        <div class="urgency-stat">
+                            <span class="stat-big">73%</span>
+                            <span class="stat-small">of romance scammers use fake identities</span>
+                        </div>
+                        <div class="urgency-stat">
+                            <span class="stat-big">$50K</span>
+                            <span class="stat-small">average loss per victim</span>
+                        </div>
+                    </div>
+                    <a href="#get-started" class="background-check-cta">
+                        🔍 Start Free Background Check
+                        <span class="cta-subtext">Sign up free • Reports from $9.99</span>
+                    </a>
+                </div>
+                <div class="background-check-visual">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <div class="search-demo">
+                                <div class="search-bar">
+                                    <span class="search-icon">🔍</span>
+                                    <span class="search-text">Enter name, phone, or email...</span>
+                                </div>
+                                <div class="results-preview">
+                                    <div class="result-item verified">
+                                        <span class="result-icon">✅</span>
+                                        <span class="result-text">Identity Verified</span>
+                                    </div>
+                                    <div class="result-item warning">
+                                        <span class="result-icon">⚠️</span>
+                                        <span class="result-text">2 Criminal Records Found</span>
+                                    </div>
+                                    <div class="result-item danger">
+                                        <span class="result-icon">🚨</span>
+                                        <span class="result-text">Known Scammer Alert</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section fade-in" id="features">
+        <div class="features-container">
+            <div class="features-header">
+                <h2>Advanced AI Protection</h2>
+                <p>Cutting-edge technology to identify, analyze, and stop fraud before it happens</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <div class="feature-title">AI Multi-Agent System</div>
+                    <div class="feature-description">8 specialized AI agents work together to investigate threats from every angle</div>
+                    <ul class="feature-benefits">
+                        <li>Web Intelligence Analysis</li>
+                        <li>Email Security Assessment</li>
+                        <li>Social Media Investigation</li>
+                        <li>Financial Crime Detection</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-title">Real-Time Detection</div>
+                    <div class="feature-description">Instant threat identification with 99.7% accuracy using advanced machine learning</div>
+                    <ul class="feature-benefits">
+                        <li>15-second threat analysis</li>
+                        <li>Live monitoring dashboard</li>
+                        <li>Instant alert notifications</li>
+                        <li>Automated threat blocking</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <div class="feature-title">Deep Investigation</div>
+                    <div class="feature-description">Comprehensive forensic analysis with court-ready documentation</div>
+                    <ul class="feature-benefits">
+                        <li>Domain & IP investigation</li>
+                        <li>Blockchain transaction tracking</li>
+                        <li>Dark web monitoring</li>
+                        <li>Attribution analysis</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-title">Professional Reports</div>
+                    <div class="feature-description">Detailed investigation reports in multiple formats for any use case</div>
+                    <ul class="feature-benefits">
+                        <li>PDF executive summaries</li>
+                        <li>Technical analysis reports</li>
+                        <li>JSON data exports</li>
+                        <li>Legal documentation</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <div class="feature-title">Enterprise Security</div>
+                    <div class="feature-description">Bank-grade security with end-to-end encryption and compliance</div>
+                    <ul class="feature-benefits">
+                        <li>SOC 2 Type II certified</li>
+                        <li>GDPR compliant</li>
+                        <li>256-bit encryption</li>
+                        <li>Zero-trust architecture</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <div class="feature-title">24/7 Monitoring</div>
+                    <div class="feature-description">Round-the-clock protection with instant threat response</div>
+                    <ul class="feature-benefits">
+                        <li>Continuous threat scanning</li>
+                        <li>Mobile app alerts</li>
+                        <li>Expert support team</li>
+                        <li>Emergency response</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section fade-in" id="pricing">
+        <div class="pricing-container">
+            <div class="pricing-header">
+                <h2>Choose Your Protection Level</h2>
+                <p>Sign up free and pay only when you need a report • No monthly fees or subscriptions</p>
+                <div class="freemium-explanation">
+                    <div class="freemium-step">
+                        <span class="step-number">1</span>
+                        <span class="step-text">Sign up free - no credit card required</span>
+                    </div>
+                    <div class="freemium-step">
+                        <span class="step-number">2</span>
+                        <span class="step-text">Enter person's details to check</span>
+                    </div>
+                    <div class="freemium-step">
+                        <span class="step-number">3</span>
+                        <span class="step-text">Pay only if you want the full report</span>
+                    </div>
+                </div>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-tier">Basic Investigation</div>
+                    <div class="pricing-price">$9.99</div>
+                    <div class="pricing-period">per report</div>
+                    <ul class="pricing-features">
+                        <li>Essential fraud detection</li>
+                        <li>Basic threat analysis</li>
+                        <li>24-hour delivery</li>
+                        <li>PDF report</li>
+                        <li>Email support</li>
+                    </ul>
+                    <button class="pricing-button">Get Started</button>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-tier">Standard Investigation</div>
+                    <div class="pricing-price">$24.99</div>
+                    <div class="pricing-period">per report</div>
+                    <ul class="pricing-features">
+                        <li>Comprehensive analysis</li>
+                        <li>Multi-source investigation</li>
+                        <li>12-hour delivery</li>
+                        <li>PDF + HTML reports</li>
+                        <li>Priority support</li>
+                        <li>Risk assessment</li>
+                    </ul>
+                    <button class="pricing-button">Get Started</button>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Most Popular</div>
+                    <div class="pricing-tier">Professional Investigation</div>
+                    <div class="pricing-price">$49.99</div>
+                    <div class="pricing-period">per report</div>
+                    <ul class="pricing-features">
+                        <li>Expert-level analysis</li>
+                        <li>Deep web investigation</li>
+                        <li>6-hour delivery</li>
+                        <li>All report formats</li>
+                        <li>Phone support</li>
+                        <li>Attribution analysis</li>
+                        <li>Threat intelligence</li>
+                    </ul>
+                    <button class="pricing-button">Get Started</button>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-tier">Forensic Investigation</div>
+                    <div class="pricing-price">$99.99</div>
+                    <div class="pricing-period">per report</div>
+                    <ul class="pricing-features">
+                        <li>Court-ready documentation</li>
+                        <li>Forensic-grade analysis</li>
+                        <li>3-hour delivery</li>
+                        <li>Legal documentation</li>
+                        <li>Expert testimony</li>
+                        <li>Chain of custody</li>
+                        <li>Compliance reporting</li>
+                    </ul>
+                    <button class="pricing-button">Get Started</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section fade-in" id="get-started">
+        <div class="cta-content">
+            <h2>Don't Be the Next Victim</h2>
+            <p>Join thousands of protected users and start checking identities today. Sign up free and get advanced AI protection when you need it.</p>
+            <a href="#" class="hero-button primary">Sign Up Free - No Credit Card</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>ScamShield AI</h3>
+                <p>Advanced fraud detection and investigation platform powered by artificial intelligence.</p>
+                <div style="margin-top: 1rem;">
+                    <i class="fab fa-twitter" style="margin-right: 1rem; font-size: 1.5rem; color: #667eea;"></i>
+                    <i class="fab fa-linkedin" style="margin-right: 1rem; font-size: 1.5rem; color: #667eea;"></i>
+                    <i class="fab fa-github" style="font-size: 1.5rem; color: #667eea;"></i>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="#">Fraud Investigation</a></li>
+                    <li><a href="#">Threat Analysis</a></li>
+                    <li><a href="#">Risk Assessment</a></li>
+                    <li><a href="#">Compliance Reports</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">API Reference</a></li>
+                    <li><a href="#">Case Studies</a></li>
+                    <li><a href="#">Security Center</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">System Status</a></li>
+                    <li><a href="#">Emergency Response</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 ScamShield AI. All rights reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+
+    <script>
+        // Loading Animation
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loadingOverlay').style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 4 + 2;
+                const left = Math.random() * 100;
+                const delay = Math.random() * 20;
+                
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = left + '%';
+                particle.style.animationDelay = delay + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Animated counters
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            
+            counters.forEach(counter => {
+                const target = parseFloat(counter.getAttribute('data-target'));
+                const increment = target / 100;
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    
+                    if (target >= 1000) {
+                        counter.textContent = (current / 1000).toFixed(1) + 'K';
+                    } else if (target < 1) {
+                        counter.textContent = current.toFixed(1);
+                    } else {
+                        counter.textContent = Math.floor(current);
+                    }
+                }, 20);
+            });
+        }
+
+        // Scroll animations
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            
+            // Trigger counter animation when stats section is visible
+            const statsSection = document.querySelector('.stats-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounters();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+            
+            if (statsSection) {
+                observer.observe(statsSection);
+            }
+        });
+
+        // Handle scroll animations
+        window.addEventListener('scroll', handleScrollAnimations);
+        handleScrollAnimations(); // Initial check
+
+        // Add click effects to buttons
+        document.querySelectorAll('button, .hero-button, .cta-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add ripple effect styles
+        const style = document.createElement('style');
+        style.textContent = `
+            .ripple {
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.6);
+                transform: scale(0);
+                animation: ripple-animation 0.6s linear;
+                pointer-events: none;
+            }
+            
+            @keyframes ripple-animation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+

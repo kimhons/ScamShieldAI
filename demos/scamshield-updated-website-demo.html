@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScamShield AI - Professional Fraud Investigation Powered by AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navigation {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+        }
+
+        .brand-icon {
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-link {
+            color: #4a5568;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #667eea;
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0 80px;
+            margin-top: 70px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .primary-button {
+            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .primary-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(56, 161, 105, 0.3);
+        }
+
+        .secondary-button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .secondary-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .trust-indicators {
+            display: flex;
+            gap: 24px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Hero Visual */
+        .investigation-demo {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .demo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .demo-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .demo-status {
+            font-size: 0.9rem;
+        }
+
+        .demo-agents {
+            margin-bottom: 24px;
+        }
+
+        .agent-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .agent-item:last-child {
+            border-bottom: none;
+        }
+
+        .agent-icon {
+            font-size: 1.2rem;
+        }
+
+        .agent-name {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .agent-status {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .demo-progress {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+            border-radius: 4px;
+            width: 67%;
+            animation: progressAnimation 3s ease-in-out infinite;
+        }
+
+        @keyframes progressAnimation {
+            0%, 100% { width: 67%; }
+            50% { width: 85%; }
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: #4a5568;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        /* Cost Comparison Banner */
+        .cost-comparison {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+        }
+
+        .comparison-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .comparison-item h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #2d3748;
+        }
+
+        .comparison-item.traditional h4 {
+            color: #e53e3e;
+        }
+
+        .comparison-item.scamshield h4 {
+            color: #38a169;
+        }
+
+        .price-range {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .comparison-item.traditional .price-range {
+            color: #e53e3e;
+        }
+
+        .comparison-item.scamshield .price-range {
+            color: #38a169;
+        }
+
+        .details {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 0.9rem;
+            color: #718096;
+        }
+
+        .vs-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .savings-badge {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 12px;
+            display: inline-block;
+        }
+
+        /* Pricing Tiers */
+        .pricing-tiers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            border: 3px solid transparent;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .pricing-card.professional {
+            border-color: #f6ad55;
+            transform: scale(1.05);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
+            color: white;
+            padding: 8px 24px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .tier-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .tier-price {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .currency {
+            font-size: 1.5rem;
+            color: #718096;
+            vertical-align: top;
+        }
+
+        .amount {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #2d3748;
+        }
+
+        .period {
+            font-size: 1rem;
+            color: #718096;
+            margin-left: 8px;
+        }
+
+        .tier-description {
+            color: #4a5568;
+            line-height: 1.5;
+            font-size: 0.95rem;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .tier-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f7fafc;
+            border-radius: 12px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #4a5568;
+            font-weight: 500;
+        }
+
+        .features-list {
+            margin-bottom: 30px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            color: #4a5568;
+            line-height: 1.4;
+        }
+
+        .check-icon {
+            color: #38a169;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 2px;
+        }
+
+        .order-button {
+            width: 100%;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 16px;
+        }
+
+        .order-button.basic {
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+            color: white;
+        }
+
+        .order-button.standard {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+        }
+
+        .order-button.professional {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .order-button.forensic {
+            background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
+            color: white;
+        }
+
+        .order-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .money-back {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #718096;
+            font-style: italic;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-guarantee {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 16px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .cost-comparison {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .pricing-tiers {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-card.professional {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navigation">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-icon">🛡️</span>
+                <span class="brand-name">ScamShield AI</span>
+            </div>
+            <div class="nav-links">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+                <a href="#about" class="nav-link">About</a>
+                <button class="nav-cta" onclick="showOrderForm()">Start Investigation</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Professional Fraud Investigation
+                    <span class="highlight"> Powered by AI</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Get expert-level fraud investigation reports in hours, not weeks. 
+                    Our 8 specialized AI agents analyze 9+ data sources to deliver 
+                    professional-grade results at 98% less cost than traditional services.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Cost Reduction</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">3-24h</div>
+                        <div class="stat-label">Delivery Time</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">9+</div>
+                        <div class="stat-label">Data Sources</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">8</div>
+                        <div class="stat-label">AI Agents</div>
+                    </div>
+                </div>
+                <div class="hero-actions">
+                    <button class="primary-button" onclick="showOrderForm()">
+                        Start Investigation Now
+                    </button>
+                    <button class="secondary-button" onclick="scrollToPricing()">
+                        View Pricing
+                    </button>
+                </div>
+                <div class="trust-indicators">
+                    <span>🔒 Bank-level Security</span>
+                    <span>⚡ Instant Results</span>
+                    <span>💰 30-day Guarantee</span>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="investigation-demo">
+                    <div class="demo-header">
+                        <span class="demo-title">Live Investigation</span>
+                        <span class="demo-status">🟢 Active</span>
+                    </div>
+                    <div class="demo-agents">
+                        <div class="agent-item">
+                            <span class="agent-icon">🕵️</span>
+                            <span class="agent-name">FBI Cyber Agent</span>
+                            <span class="agent-status">Analyzing...</span>
+                        </div>
+                        <div class="agent-item">
+                            <span class="agent-icon">🔍</span>
+                            <span class="agent-name">CIA Intelligence</span>
+                            <span class="agent-status">Complete ✓</span>
+                        </div>
+                        <div class="agent-item">
+                            <span class="agent-icon">🌐</span>
+                            <span class="agent-name">MI6 Signals</span>
+                            <span class="agent-status">Processing...</span>
+                        </div>
+                        <div class="agent-item">
+                            <span class="agent-icon">🛡️</span>
+                            <span class="agent-name">Mossad Counter-Intel</span>
+                            <span class="agent-status">Queued</span>
+                        </div>
+                    </div>
+                    <div class="demo-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <span class="progress-text">67% Complete</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Professional Investigation Reports</h2>
+                <p class="section-subtitle">
+                    Choose the perfect report tier for your investigation needs. 
+                    Pay only for what you need, when you need it.
+                </p>
+                
+                <!-- Cost Comparison Banner -->
+                <div class="cost-comparison">
+                    <div class="comparison-item traditional">
+                        <h4>Traditional Services</h4>
+                        <div class="price-range">$500 - $5,000</div>
+                        <div class="details">
+                            <span>⏱ 2-4 weeks</span>
+                            <span>📊 2-3 data sources</span>
+                            <span>📄 PDF only</span>
+                        </div>
+                    </div>
+                    
+                    <div class="vs-divider">
+                        <span>VS</span>
+                    </div>
+                    
+                    <div class="comparison-item scamshield">
+                        <h4>ScamShield AI</h4>
+                        <div class="price-range">$9.99 - $99.99</div>
+                        <div class="details">
+                            <span>⚡ 3-24 hours</span>
+                            <span>🔗 9+ data sources</span>
+                            <span>📋 PDF, HTML, JSON, Word</span>
+                        </div>
+                        <div class="savings-badge">98% cost reduction</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pricing Tiers -->
+            <div class="pricing-tiers">
+                <div class="pricing-card basic">
+                    <div class="tier-name">Basic Report</div>
+                    <div class="tier-price">
+                        <span class="currency">$</span>
+                        <span class="amount">9.99</span>
+                        <span class="period">per report</span>
+                    </div>
+                    <p class="tier-description">Essential fraud investigation for quick risk assessment</p>
+                    
+                    <div class="tier-details">
+                        <div class="detail-item">
+                            <span>📄</span>
+                            <span>3-5 pages</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>⏱</span>
+                            <span>24 hours</span>
+                        </div>
+                    </div>
+
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Identity Verification</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Basic Digital Footprint Analysis</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Compliance Screening</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>PDF & HTML Export</span>
+                        </div>
+                    </div>
+
+                    <button class="order-button basic" onclick="orderReport('basic')">
+                        Order Basic Report
+                    </button>
+                    <div class="money-back">30-day money-back guarantee</div>
+                </div>
+
+                <div class="pricing-card standard">
+                    <div class="tier-name">Standard Report</div>
+                    <div class="tier-price">
+                        <span class="currency">$</span>
+                        <span class="amount">24.99</span>
+                        <span class="period">per report</span>
+                    </div>
+                    <p class="tier-description">Comprehensive analysis with detailed findings and strategic recommendations</p>
+                    
+                    <div class="tier-details">
+                        <div class="detail-item">
+                            <span>📄</span>
+                            <span>8-12 pages</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>⏱</span>
+                            <span>12 hours</span>
+                        </div>
+                    </div>
+
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Everything in Basic</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Advanced Digital Forensics</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Financial Intelligence Analysis</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>All Export Formats</span>
+                        </div>
+                    </div>
+
+                    <button class="order-button standard" onclick="orderReport('standard')">
+                        Order Standard Report
+                    </button>
+                    <div class="money-back">30-day money-back guarantee</div>
+                </div>
+
+                <div class="pricing-card professional">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="tier-name">Professional Report</div>
+                    <div class="tier-price">
+                        <span class="currency">$</span>
+                        <span class="amount">49.99</span>
+                        <span class="period">per report</span>
+                    </div>
+                    <p class="tier-description">Expert-level analysis with advanced risk modeling and detailed methodology</p>
+                    
+                    <div class="tier-details">
+                        <div class="detail-item">
+                            <span>📄</span>
+                            <span>15-25 pages</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>⏱</span>
+                            <span>6 hours</span>
+                        </div>
+                    </div>
+
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Everything in Standard</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Multi-Agent AI Investigation</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Advanced Risk Modeling</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Professional Formatting</span>
+                        </div>
+                    </div>
+
+                    <button class="order-button professional" onclick="orderReport('professional')">
+                        Order Professional Report
+                    </button>
+                    <div class="money-back">30-day money-back guarantee</div>
+                </div>
+
+                <div class="pricing-card forensic">
+                    <div class="tier-name">Forensic Report</div>
+                    <div class="tier-price">
+                        <span class="currency">$</span>
+                        <span class="amount">99.99</span>
+                        <span class="period">per report</span>
+                    </div>
+                    <p class="tier-description">Legal-grade documentation with complete evidence chain for court proceedings</p>
+                    
+                    <div class="tier-details">
+                        <div class="detail-item">
+                            <span>📄</span>
+                            <span>25-40 pages</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>⏱</span>
+                            <span>3 hours</span>
+                        </div>
+                    </div>
+
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Everything in Professional</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Legal-Grade Documentation</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Expert Certification</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Court-Admissible Format</span>
+                        </div>
+                    </div>
+
+                    <button class="order-button forensic" onclick="orderReport('forensic')">
+                        Order Forensic Report
+                    </button>
+                    <div class="money-back">30-day money-back guarantee</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Revolutionize Your Fraud Investigation?</h2>
+                <p>Join thousands of professionals who trust ScamShield AI for accurate, fast, and affordable fraud detection</p>
+                <button class="primary-button" onclick="showOrderForm()">
+                    Start Your Investigation
+                </button>
+                <div class="cta-guarantee">
+                    30-day money-back guarantee • No setup fees • Instant delivery
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function scrollToPricing() {
+            document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showOrderForm() {
+            alert('🚀 Order form would open here!\n\nThis demo shows the new per-report pricing model:\n\n• Basic Report: $9.99\n• Standard Report: $24.99\n• Professional Report: $49.99\n• Forensic Report: $99.99\n\nCompare to traditional services: $500-$5,000!\n\n98% cost reduction with AI-powered investigation.');
+        }
+
+        function orderReport(tier) {
+            const prices = {
+                basic: '$9.99',
+                standard: '$24.99', 
+                professional: '$49.99',
+                forensic: '$99.99'
+            };
+            
+            alert(`🎯 Ordering ${tier.charAt(0).toUpperCase() + tier.slice(1)} Report for ${prices[tier]}!\n\nThis would redirect to the order form with:\n\n• Investigation subject input\n• Contact information\n• Payment processing\n• Instant investigation start\n\nDelivery in 3-24 hours vs. weeks for traditional services!`);
+        }
+
+        // Animate progress bar
+        setInterval(() => {
+            const progressFill = document.querySelector('.progress-fill');
+            const currentWidth = parseInt(progressFill.style.width) || 67;
+            const newWidth = currentWidth >= 85 ? 67 : currentWidth + 1;
+            progressFill.style.width = newWidth + '%';
+            
+            const progressText = document.querySelector('.progress-text');
+            progressText.textContent = newWidth + '% Complete';
+        }, 100);
+    </script>
+</body>
+</html>
+
