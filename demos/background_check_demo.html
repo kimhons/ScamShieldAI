@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScamShield AI - Background Check Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1f2937, #374151);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .form-section h3 {
+            color: #2d3748;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            color: #4a5568;
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .form-group input {
+            padding: 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #4299e1;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .submit-button {
+            width: 100%;
+            background: linear-gradient(135deg, #4299e1, #3182ce);
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-button:hover {
+            background: linear-gradient(135deg, #3182ce, #2c5282);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(66, 153, 225, 0.3);
+        }
+
+        .submit-button:active {
+            transform: translateY(0);
+        }
+
+        .results-container {
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .results-header h2 {
+            color: #2d3748;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .new-search-btn {
+            background: #718096;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .new-search-btn:hover {
+            background: #4a5568;
+        }
+
+        .subject-info {
+            background: linear-gradient(135deg, #ebf8ff, #bee3f8);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #4299e1;
+        }
+
+        .subject-info h4 {
+            color: #2c5282;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .subject-info p {
+            margin: 8px 0;
+            color: #2d3748;
+            font-weight: 500;
+        }
+
+        .risk-assessment {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 2px solid #e2e8f0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .risk-assessment h4 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .risk-meter {
+            width: 100%;
+            height: 25px;
+            background: #e2e8f0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .risk-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #48bb78, #38a169);
+            border-radius: 15px;
+            transition: width 2s ease-in-out;
+            position: relative;
+        }
+
+        .risk-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .risk-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2d3748;
+        }
+
+        .risk-level {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #48bb78;
+        }
+
+        .verification-sections {
+            display: grid;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .verification-section {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .verification-section h4 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .verification-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .verification-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #f7fafc;
+            border-radius: 8px;
+            border-left: 3px solid #4299e1;
+        }
+
+        .verification-item .label {
+            color: #718096;
+            font-weight: 500;
+        }
+
+        .verification-item .value {
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .verification-item .value.success {
+            color: #38a169;
+        }
+
+        .verification-item .value.warning {
+            color: #d69e2e;
+        }
+
+        .address-item {
+            margin-bottom: 15px;
+            padding: 20px;
+            background: #f7fafc;
+            border-radius: 8px;
+            border-left: 4px solid #4299e1;
+        }
+
+        .address-main {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+
+        .address-details {
+            display: flex;
+            gap: 20px;
+            font-size: 0.95rem;
+            color: #718096;
+            flex-wrap: wrap;
+        }
+
+        .social-profile {
+            margin-bottom: 15px;
+            padding: 20px;
+            background: #f7fafc;
+            border-radius: 8px;
+            border-left: 4px solid #805ad5;
+        }
+
+        .profile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .profile-header strong {
+            color: #2d3748;
+            font-size: 1.1rem;
+        }
+
+        .status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .status.verified {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .report-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .action-button {
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .download-button {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+        }
+
+        .download-button:hover {
+            background: linear-gradient(135deg, #38a169, #2f855a);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(72, 187, 120, 0.3);
+        }
+
+        .share-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .share-button:hover {
+            background: linear-gradient(135deg, #5a67d8, #6b46c1);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e2e8f0;
+            border-top: 4px solid #4299e1;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #4a5568;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 8px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .verification-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .address-details {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .report-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 ScamShield AI</h1>
+            <p>Advanced Background Check & Identity Verification</p>
+        </div>
+
+        <div class="content">
+            <div id="form-container" class="form-container">
+                <form id="background-check-form">
+                    <div class="form-section">
+                        <h3>👤 Personal Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required placeholder="Enter first name">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required placeholder="Enter last name">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>📞 Contact Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="Enter email address">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>🏠 Address Information</h3>
+                        <div class="form-group">
+                            <label for="address">Street Address</label>
+                            <input type="text" id="address" name="address" placeholder="123 Main Street">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" id="city" name="city" placeholder="New York">
+                            </div>
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <input type="text" id="state" name="state" placeholder="NY" maxlength="2">
+                            </div>
+                            <div class="form-group">
+                                <label for="zipCode">ZIP Code</label>
+                                <input type="text" id="zipCode" name="zipCode" placeholder="10001">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-button">
+                        🚀 Start Background Check
+                    </button>
+                </form>
+            </div>
+
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <div class="loading-text">Performing comprehensive background check...</div>
+                <div style="margin-top: 15px; color: #718096; font-size: 0.95rem;">
+                    Searching multiple databases and verifying information...
+                </div>
+            </div>
+
+            <div id="results-container" class="results-container">
+                <div class="results-header">
+                    <h2>📋 Background Check Report</h2>
+                    <button class="new-search-btn" onclick="resetForm()">New Search</button>
+                </div>
+
+                <div class="subject-info">
+                    <h4>Subject Information</h4>
+                    <p><strong>Name:</strong> <span id="result-name"></span></p>
+                    <p><strong>Email:</strong> <span id="result-email"></span></p>
+                    <p><strong>Phone:</strong> <span id="result-phone"></span></p>
+                    <p><strong>Investigation Date:</strong> <span id="result-date"></span></p>
+                </div>
+
+                <div class="risk-assessment">
+                    <h4>🎯 Risk Assessment</h4>
+                    <div class="risk-meter">
+                        <div id="risk-fill" class="risk-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="risk-details">
+                        <span id="risk-number" class="risk-number">0.0/100</span>
+                        <span id="risk-level" class="risk-level">Low Risk</span>
+                    </div>
+                    <p><strong>Confidence Level:</strong> <span id="confidence-level">High</span></p>
+                    <p><strong>Data Sources:</strong> <span id="data-sources">TruePeopleSearch, Address Verification Service, Phone Carrier Database, Email Verification Service, Social Media Search, Criminal Records Database, OpenSanctions</span></p>
+                </div>
+
+                <div class="verification-sections">
+                    <div class="verification-section">
+                        <h4>✅ Identity Verification</h4>
+                        <div class="verification-grid">
+                            <div class="verification-item">
+                                <span class="label">Identity Found:</span>
+                                <span class="value success">Yes</span>
+                            </div>
+                            <div class="verification-item">
+                                <span class="label">Name Match:</span>
+                                <span class="value">Exact</span>
+                            </div>
+                            <div class="verification-item">
+                                <span class="label">Age Range:</span>
+                                <span class="value">30-35</span>
+                            </div>
+                            <div class="verification-item">
+                                <span class="label">Verification Score:</span>
+                                <span class="value">92%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="verification-section">
+                        <h4>🏠 Address History</h4>
+                        <div class="address-item">
+                            <div class="address-main" id="current-address">123 Main Street, New York, NY 10001</div>
+                            <div class="address-details">
+                                <span>Period: 2021-2024</span>
+                                <span>Status: Verified</span>
+                                <span>Type: Apartment</span>
+                            </div>
+                        </div>
+                        <div class="address-item">
+                            <div class="address-main">456 Oak Avenue, Previous City, NY 67890</div>
+                            <div class="address-details">
+                                <span>Period: 2019-2021</span>
+                                <span>Status: Verified</span>
+                                <span>Type: Single Family</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="verification-section">
+                        <h4>📱 Phone Verification</h4>
+                        <div class="verification-grid">
+                            <div class="verification-item">
+                                <span class="label">Valid:</span>
+                                <span class="value success">Yes</span>
+                            </div>
+                            <div class="verification-item">
+                                <span class="label">Carrier:</span>
+                                <span class="value">T-Mobile</span>
+                            </div>
+                            <div class="verification-item">
+                                <span class="label">Type:</span>
+                                <span class="value">Mobile</span>
+                            </div>
+                            <div class="verification-item">
+                                <span class="label">Location:</span>
+                                <span class="value">New York, NY</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="verification-section">
+                        <h4>📧 Email Verification</h4>
+                        <div class="verification-grid">
+                            <div class="verification-item">
+                                <span class="label">Valid:</span>
+                                <span class="value success">Yes</span>
+                            </div>
+                            <div class="verification-item">
+                                <span class="label">Deliverable:</span>
+                                <span class="value success">Yes</span>
+                            </div>
+                            <div class="verification-item">
+                                <span class="label">Domain:</span>
+                                <span class="value" id="email-domain">example.com</span>
+                            </div>
+                            <div class="verification-item">
+                                <span class="label">Reputation:</span>
+                                <span class="value">Good</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="verification-section">
+                        <h4>📱 Social Media Profiles</h4>
+                        <div class="social-profile">
+                            <div class="profile-header">
+                                <strong>LinkedIn</strong>
+                                <span class="status verified">Verified</span>
+                            </div>
+                            <div class="profile-details">
+                                <p><strong>Username:</strong> <span id="linkedin-username">john.doe</span></p>
+                                <p><strong>Activity:</strong> Active</p>
+                                <p><strong>Current Role:</strong> Marketing Manager at Digital Solutions Inc</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="verification-section">
+                        <h4>⚖️ Criminal Records</h4>
+                        <div class="verification-grid">
+                            <div class="verification-item">
+                                <span class="label">Records Found:</span>
+                                <span class="value success">No</span>
+                            </div>
+                            <div class="verification-item">
+                                <span class="label">States Searched:</span>
+                                <span class="value">NY, NJ, CT</span>
+                            </div>
+                            <div class="verification-item">
+                                <span class="label">Federal Search:</span>
+                                <span class="value">Yes</span>
+                            </div>
+                            <div class="verification-item">
+                                <span class="label">Sex Offender Check:</span>
+                                <span class="value">Yes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="report-actions">
+                    <button class="action-button download-button" onclick="downloadReport()">
+                        📄 Download PDF Report
+                    </button>
+                    <button class="action-button share-button" onclick="shareReport()">
+                        📤 Share Report
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('background-check-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Show loading
+            document.getElementById('form-container').style.display = 'none';
+            document.getElementById('loading').style.display = 'block';
+            
+            // Simulate API call
+            setTimeout(() => {
+                showResults(data);
+            }, 4000);
+        });
+
+        function showResults(data) {
+            // Hide loading
+            document.getElementById('loading').style.display = 'none';
+            
+            // Update result data
+            document.getElementById('result-name').textContent = `${data.firstName} ${data.lastName}`;
+            document.getElementById('result-email').textContent = data.email || 'Not provided';
+            document.getElementById('result-phone').textContent = data.phone || 'Not provided';
+            document.getElementById('result-date').textContent = new Date().toLocaleString();
+            
+            // Update address
+            if (data.address && data.city && data.state && data.zipCode) {
+                document.getElementById('current-address').textContent = `${data.address}, ${data.city}, ${data.state} ${data.zipCode}`;
+            }
+            
+            // Update email domain
+            if (data.email) {
+                const domain = data.email.split('@')[1] || 'example.com';
+                document.getElementById('email-domain').textContent = domain;
+            }
+            
+            // Update LinkedIn username
+            if (data.firstName && data.lastName) {
+                document.getElementById('linkedin-username').textContent = `${data.firstName.toLowerCase()}.${data.lastName.toLowerCase()}`;
+            }
+            
+            // Animate risk score
+            const riskScore = 15.2;
+            const riskFill = document.getElementById('risk-fill');
+            const riskNumber = document.getElementById('risk-number');
+            
+            setTimeout(() => {
+                riskFill.style.width = `${riskScore}%`;
+                riskNumber.textContent = `${riskScore.toFixed(1)}/100`;
+            }, 500);
+            
+            // Show results
+            document.getElementById('results-container').style.display = 'block';
+        }
+
+        function resetForm() {
+            document.getElementById('background-check-form').reset();
+            document.getElementById('results-container').style.display = 'none';
+            document.getElementById('form-container').style.display = 'block';
+        }
+
+        function downloadReport() {
+            alert('📄 PDF report download would be implemented here.\n\nThis would generate a comprehensive PDF report with all investigation findings.');
+        }
+
+        function shareReport() {
+            alert('📤 Report sharing would be implemented here.\n\nThis would allow secure sharing of the investigation report with authorized parties.');
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScamShield AI - My Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo::before {
+            content: "🛡️";
+            font-size: 1.8rem;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: white;
+        }
+
+        .user-info {
+            text-align: right;
+        }
+
+        .user-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .user-status {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .welcome-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-title {
+            font-size: 2rem;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .protection-status {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .welcome-description {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .stat-card {
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Action Cards */
+        .action-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .action-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .action-card.primary {
+            border: 3px solid #4CAF50;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(255, 255, 255, 0.95));
+        }
+
+        .action-card.secondary {
+            border: 3px solid #FF9800;
+            background: linear-gradient(135deg, rgba(255, 152, 0, 0.1), rgba(255, 255, 255, 0.95));
+        }
+
+        .action-card.tertiary {
+            border: 3px solid #F44336;
+            background: linear-gradient(135deg, rgba(244, 67, 54, 0.1), rgba(255, 255, 255, 0.95));
+        }
+
+        .action-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .action-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .action-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .action-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .action-button.primary {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+        }
+
+        .action-button.secondary {
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+        }
+
+        .action-button.tertiary {
+            background: linear-gradient(135deg, #F44336, #D32F2F);
+        }
+
+        /* Reports Section */
+        .reports-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .view-all-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: rgba(102, 126, 234, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .view-all-link:hover {
+            background: rgba(102, 126, 234, 0.2);
+        }
+
+        .reports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .report-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            border-left: 5px solid #ddd;
+        }
+
+        .report-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .report-card.completed {
+            border-left-color: #4CAF50;
+        }
+
+        .report-card.processing {
+            border-left-color: #FF9800;
+        }
+
+        .report-card.analyzing {
+            border-left-color: #2196F3;
+        }
+
+        .report-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .report-id {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .report-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .report-status.completed {
+            background: #E8F5E8;
+            color: #4CAF50;
+        }
+
+        .report-status.processing {
+            background: #FFF3E0;
+            color: #FF9800;
+        }
+
+        .report-status.analyzing {
+            background: #E3F2FD;
+            color: #2196F3;
+        }
+
+        .report-target {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .report-type {
+            color: #667eea;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .report-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .report-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .report-button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .report-button.download {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+        }
+
+        .report-button.view {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            color: white;
+        }
+
+        .report-button.track {
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+            color: white;
+        }
+
+        .report-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Protection Tips */
+        .protection-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .protection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .protection-tip {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .protection-tip:hover {
+            transform: translateY(-3px);
+        }
+
+        .tip-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .tip-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .tip-description {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            color: #333;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Evidence Upload */
+        .evidence-section {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            background: #f9f9f9;
+        }
+
+        .evidence-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .evidence-tab {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 20px;
+            background: #e0e0e0;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .evidence-tab.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .upload-area {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            background: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .upload-area:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .upload-text {
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-subtext {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        /* Links Section */
+        .links-section {
+            margin: 1.5rem 0;
+        }
+
+        .link-input-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            align-items: flex-end;
+        }
+
+        .link-input {
+            flex: 2;
+        }
+
+        .link-description {
+            flex: 1;
+        }
+
+        .add-link-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-link-btn:hover {
+            background: #5a6fd8;
+        }
+
+        /* Investigation Levels */
+        .investigation-levels {
+            display: grid;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .investigation-level {
+            border: 2px solid #ddd;
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .investigation-level:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
+        }
+
+        .investigation-level.selected {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .level-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .level-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .level-price {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #667eea;
+        }
+
+        .level-features {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* Modal Actions */
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .modal-button {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .modal-button.cancel {
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        .modal-button.cancel:hover {
+            background: #e0e0e0;
+        }
+
+        .modal-button.primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .modal-button.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header {
+                padding: 1rem;
+            }
+
+            .welcome-title {
+                font-size: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .action-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .reports-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .protection-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 1.5rem;
+            }
+
+            .link-input-group {
+                flex-direction: column;
+            }
+
+            .modal-actions {
+                flex-direction: column;
+            }
+
+            .evidence-tabs {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .user-profile {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .welcome-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+
+        /* Animation for loading states */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .loading::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid #667eea;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Notification styles */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.error {
+            background: #F44336;
+        }
+
+        .notification.warning {
+            background: #FF9800;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            ScamShield AI
+        </div>
+        <div class="user-profile">
+            <div class="user-info">
+                <div class="user-name">Sarah Johnson</div>
+                <div class="user-status">Premium Member</div>
+            </div>
+            <div class="user-avatar">SJ</div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <div class="welcome-header">
+                <h1 class="welcome-title">Welcome back, Sarah!</h1>
+                <div class="protection-status">Protected & Secure</div>
+            </div>
+            <p class="welcome-description">
+                Your personal fraud protection center. Run background checks, track investigations, and stay protected from scams.
+            </p>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">Reports Generated</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$347</div>
+                    <div class="stat-label">Total Spent</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Threats Detected</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Action Cards -->
+        <section class="action-cards">
+            <div class="action-card primary">
+                <div class="action-icon">🔍</div>
+                <h3 class="action-title">Run New Background Check</h3>
+                <p class="action-description">
+                    Verify anyone's identity in seconds. Check criminal records, social media, and fraud databases.
+                </p>
+                <button class="action-button primary" onclick="openInvestigationModal()">
+                    + Start Investigation
+                </button>
+            </div>
+
+            <div class="action-card secondary">
+                <div class="action-icon">📄</div>
+                <h3 class="action-title">View My Reports</h3>
+                <p class="action-description">
+                    Access all your investigation reports, download PDFs, and track ongoing investigations.
+                </p>
+                <a href="#reports" class="action-button secondary">👁️ View Reports</a>
+            </div>
+
+            <div class="action-card tertiary">
+                <div class="action-icon">🚨</div>
+                <h3 class="action-title">Fraud Alerts</h3>
+                <p class="action-description">
+                    Stay updated on the latest scam trends and get personalized protection recommendations.
+                </p>
+                <a href="#alerts" class="action-button tertiary">⚠️ View Alerts</a>
+            </div>
+        </section>
+
+        <!-- Reports Section -->
+        <section class="reports-section" id="reports">
+            <div class="section-header">
+                <h2 class="section-title">My Recent Reports</h2>
+                <a href="#" class="view-all-link">View All Reports →</a>
+            </div>
+            <div class="reports-grid">
+                <div class="report-card completed">
+                    <div class="report-header">
+                        <div class="report-id">#RPT-2024-001847</div>
+                        <div class="report-status completed">Completed</div>
+                    </div>
+                    <div class="report-target">john.smith@email.com</div>
+                    <div class="report-type">Professional Investigation</div>
+                    <div class="report-meta">
+                        <span>2 hours ago</span>
+                        <span>$49.99</span>
+                    </div>
+                    <div class="report-actions">
+                        <a href="#" class="report-button download">⬇️ Download</a>
+                        <a href="#" class="report-button view">👁️ View</a>
+                    </div>
+                </div>
+
+                <div class="report-card analyzing">
+                    <div class="report-header">
+                        <div class="report-id">#RPT-2024-001846</div>
+                        <div class="report-status analyzing">Analyzing</div>
+                    </div>
+                    <div class="report-target">+1-555-0123</div>
+                    <div class="report-type">Basic Investigation</div>
+                    <div class="report-meta">
+                        <span>3 hours ago</span>
+                        <span>$9.99</span>
+                    </div>
+                    <div class="report-actions">
+                        <a href="#" class="report-button track">📊 Track Progress</a>
+                    </div>
+                </div>
+
+                <div class="report-card completed">
+                    <div class="report-header">
+                        <div class="report-id">#RPT-2024-001845</div>
+                        <div class="report-status completed">Completed</div>
+                    </div>
+                    <div class="report-target">suspicious-profile.com</div>
+                    <div class="report-type">Standard Investigation</div>
+                    <div class="report-meta">
+                        <span>1 day ago</span>
+                        <span>$24.99</span>
+                    </div>
+                    <div class="report-actions">
+                        <a href="#" class="report-button download">⬇️ Download</a>
+                        <a href="#" class="report-button view">👁️ View</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Protection Section -->
+        <section class="protection-section" id="alerts">
+            <h2 class="section-title">Stay Protected</h2>
+            <div class="protection-grid">
+                <div class="protection-tip">
+                    <div class="tip-icon">💕</div>
+                    <h4 class="tip-title">Romance Scam Alert</h4>
+                    <p class="tip-description">
+                        Always verify someone's identity before sharing personal information or sending money in online relationships.
+                    </p>
+                </div>
+
+                <div class="protection-tip">
+                    <div class="tip-icon">💰</div>
+                    <h4 class="tip-title">Investment Fraud</h4>
+                    <p class="tip-description">
+                        Be wary of "guaranteed" high returns. Research investment opportunities and verify credentials before investing.
+                    </p>
+                </div>
+
+                <div class="protection-tip">
+                    <div class="tip-icon">📱</div>
+                    <h4 class="tip-title">Phone Scams</h4>
+                    <p class="tip-description">
+                        Never give personal information over the phone to unsolicited callers. Verify the caller's identity first.
+                    </p>
+                </div>
+
+                <div class="protection-tip">
+                    <div class="tip-icon">🔗</div>
+                    <h4 class="tip-title">Phishing Links</h4>
+                    <p class="tip-description">
+                        Don't click suspicious links in emails or texts. Always verify the sender and URL before clicking.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Investigation Modal -->
+    <div id="investigationModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeInvestigationModal()">&times;</button>
+            <h2 class="modal-title">Start New Background Check</h2>
+            
+            <form id="investigationForm">
+                <div class="form-group">
+                    <label class="form-label">What would you like to investigate?</label>
+                    <select class="form-select" id="targetType">
+                        <option value="email">Email Address</option>
+                        <option value="phone">Phone Number</option>
+                        <option value="name">Full Name</option>
+                        <option value="domain">Website/Domain</option>
+                        <option value="social">Social Media Profile</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Enter Details</label>
+                    <input type="text" class="form-input" id="targetValue" placeholder="Enter email, phone, name, or URL...">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">📎 Upload Supporting Evidence (Optional)</label>
+                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">
+                        Provide screenshots, documents, messages, or other evidence to enhance your investigation
+                    </p>
+                    
+                    <div class="evidence-section">
+                        <div class="evidence-tabs">
+                            <button type="button" class="evidence-tab active" onclick="switchEvidenceTab('all')">📁 All Files</button>
+                            <button type="button" class="evidence-tab" onclick="switchEvidenceTab('screenshots')">📷 Screenshots</button>
+                            <button type="button" class="evidence-tab" onclick="switchEvidenceTab('messages')">💬 Messages</button>
+                            <button type="button" class="evidence-tab" onclick="switchEvidenceTab('documents')">📄 Documents</button>
+                            <button type="button" class="evidence-tab" onclick="switchEvidenceTab('links')">🔗 Links</button>
+                        </div>
+                        
+                        <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                            <div class="upload-icon">⬆️</div>
+                            <div class="upload-text">Drag & Drop Files Here</div>
+                            <div class="upload-text">or <strong>browse files</strong></div>
+                            <div class="upload-subtext">Supports: JPG, PNG, PDF, DOC, TXT, MP4, ZIP</div>
+                        </div>
+                        <input type="file" id="fileInput" multiple style="display: none;" onchange="handleFileUpload(this)">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">🔗 Add Relevant Links</label>
+                    <div class="links-section">
+                        <div class="link-input-group">
+                            <div class="link-input">
+                                <input type="url" class="form-input" placeholder="https://suspicious-website.com">
+                            </div>
+                            <div class="link-description">
+                                <input type="text" class="form-input" placeholder="Description (optional)">
+                            </div>
+                            <button type="button" class="add-link-btn" onclick="addLink()">+ Add Link</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">📝 Additional Notes</label>
+                    <textarea class="form-textarea" placeholder="Describe the context of your evidence, timeline of events, or any specific concerns..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Choose Investigation Level</label>
+                    <div class="investigation-levels">
+                        <div class="investigation-level" onclick="selectLevel(this, 'basic')">
+                            <div class="level-header">
+                                <div class="level-name">Basic Investigation</div>
+                                <div class="level-price">$9.99</div>
+                            </div>
+                            <div class="level-features">Essential fraud detection • 24-hour delivery • PDF report</div>
+                        </div>
+
+                        <div class="investigation-level selected" onclick="selectLevel(this, 'standard')">
+                            <div class="level-header">
+                                <div class="level-name">Standard Investigation</div>
+                                <div class="level-price">$24.99</div>
+                            </div>
+                            <div class="level-features">Comprehensive analysis • 12-hour delivery • Multiple formats</div>
+                        </div>
+
+                        <div class="investigation-level" onclick="selectLevel(this, 'professional')">
+                            <div class="level-header">
+                                <div class="level-name">Professional Investigation</div>
+                                <div class="level-price">$49.99</div>
+                            </div>
+                            <div class="level-features">Expert analysis • 6-hour delivery • All formats • Phone support</div>
+                        </div>
+
+                        <div class="investigation-level" onclick="selectLevel(this, 'forensic')">
+                            <div class="level-header">
+                                <div class="level-name">Forensic Investigation</div>
+                                <div class="level-price">$99.99</div>
+                            </div>
+                            <div class="level-features">Court-ready documentation • 3-hour delivery • Expert testimony</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="modal-button cancel" onclick="closeInvestigationModal()">Cancel</button>
+                    <button type="submit" class="modal-button primary">💳 Proceed to Payment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <script>
+        // Modal functionality
+        function openInvestigationModal() {
+            document.getElementById('investigationModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeInvestigationModal() {
+            document.getElementById('investigationModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Evidence tab switching
+        function switchEvidenceTab(tab) {
+            document.querySelectorAll('.evidence-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Here you would filter the uploaded files by type
+            console.log('Switched to tab:', tab);
+        }
+
+        // Investigation level selection
+        function selectLevel(element, level) {
+            document.querySelectorAll('.investigation-level').forEach(l => l.classList.remove('selected'));
+            element.classList.add('selected');
+            console.log('Selected level:', level);
+        }
+
+        // File upload handling
+        function handleFileUpload(input) {
+            const files = Array.from(input.files);
+            files.forEach(file => {
+                console.log('Uploaded file:', file.name, file.type, file.size);
+                showNotification(`Uploaded: ${file.name}`, 'success');
+            });
+        }
+
+        // Add link functionality
+        function addLink() {
+            const linkInput = event.target.parentElement.querySelector('input[type="url"]');
+            const descInput = event.target.parentElement.querySelector('input[type="text"]');
+            
+            if (linkInput.value) {
+                console.log('Added link:', linkInput.value, descInput.value);
+                showNotification('Link added successfully', 'success');
+                linkInput.value = '';
+                descInput.value = '';
+            }
+        }
+
+        // Form submission
+        document.getElementById('investigationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                targetType: document.getElementById('targetType').value,
+                targetValue: document.getElementById('targetValue').value,
+                level: document.querySelector('.investigation-level.selected')?.getAttribute('onclick')?.match(/'(\w+)'/)?.[1] || 'standard'
+            };
+            
+            console.log('Form submitted:', formData);
+            showNotification('Investigation started! Redirecting to payment...', 'success');
+            
+            // Simulate processing
+            setTimeout(() => {
+                closeInvestigationModal();
+                showNotification('Payment completed. Investigation in progress.', 'success');
+            }, 2000);
+        });
+
+        // Notification system
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('investigationModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeInvestigationModal();
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Auto-update report statuses (simulation)
+        setInterval(() => {
+            const processingReports = document.querySelectorAll('.report-status.analyzing');
+            processingReports.forEach(status => {
+                if (Math.random() > 0.95) { // 5% chance to complete
+                    status.textContent = 'Completed';
+                    status.className = 'report-status completed';
+                    status.closest('.report-card').className = 'report-card completed';
+                    
+                    // Add download button
+                    const actions = status.closest('.report-card').querySelector('.report-actions');
+                    actions.innerHTML = `
+                        <a href="#" class="report-button download">⬇️ Download</a>
+                        <a href="#" class="report-button view">👁️ View</a>
+                    `;
+                    
+                    showNotification('Investigation completed! Report ready for download.', 'success');
+                }
+            });
+        }, 10000); // Check every 10 seconds
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('ScamShield AI Client Dashboard loaded');
+            
+            // Add some interactive animations
+            const cards = document.querySelectorAll('.action-card, .report-card, .protection-tip');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.style.animation = 'fadeInUp 0.6s ease forwards';
+            });
+        });
+
+        // Add CSS animation for fade in
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+

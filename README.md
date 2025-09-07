@@ -92,6 +92,12 @@ ScamShield AI is the world's most advanced multi-agent fraud investigation platf
 - **Scalability**: 10x concurrent investigation capacity
 - **Coverage**: Multi-domain fraud detection across all major categories
 
+## 🚀 **Live Demo**
+
+- **🌐 Main Website**: [Open `demos/scamshield-vibrant-animated-website.html`](./demos/scamshield-vibrant-animated-website.html)
+- **👤 Client Dashboard**: [Open `frontend/src/components/ClientDashboardConnected.html`](./frontend/src/components/ClientDashboardConnected.html)
+- **⚙️ Admin Dashboard**: [Open `demos/scamshield-admin-dashboard.html`](./demos/scamshield-admin-dashboard.html)
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -103,8 +109,8 @@ ScamShield AI is the world's most advanced multi-agent fraud investigation platf
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/your-org/scamshield-ai.git
-cd scamshield-ai
+git clone https://github.com/kimhons/ScamShieldAI.git
+cd ScamShieldAI
 ```
 
 2. **Backend Setup**
