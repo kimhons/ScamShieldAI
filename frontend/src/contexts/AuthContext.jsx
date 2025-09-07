@@ -18,7 +18,7 @@ export function AuthProvider({ children }) {
         id: 'test-user-123',
         email: 'admin@scamshield.ai',
         full_name: 'Admin User',
-        role: 'admin', // Change to 'admin' to test admin dashboard
+        role: 'admin', // Change to 'client' to test client dashboard
         created_at: new Date().toISOString(),
         subscription_tier: 'enterprise',
         user_metadata: {
