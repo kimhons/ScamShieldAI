@@ -15,14 +15,14 @@ export function AuthProvider({ children }) {
     if (testMode) {
       // Set mock user for testing
       const mockUser = {
-        id: 'test-user-123',
-        email: 'client@scamshield.ai',
-        full_name: 'Client User',
-        role: 'client', // Change to 'admin' to test admin dashboard
+        id: 'test-admin-123',
+        email: 'admin@scamshield.ai',
+        full_name: 'Admin User',
+        role: 'admin', // Change to 'admin' to test admin dashboard
         created_at: new Date().toISOString(),
-        subscription_tier: 'professional',
+        subscription_tier: 'enterprise',
         user_metadata: {
-          role: 'client'
+          role: 'admin'
         }
       };
       
