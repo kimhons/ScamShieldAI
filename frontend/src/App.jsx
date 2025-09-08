@@ -7,6 +7,7 @@ import { ClientDashboard } from './components/client/ClientDashboard';
 import { AdminDashboard } from './components/admin/AdminDashboard';
 import { ErrorBoundary } from './components/ui/ErrorBoundary';
 import { DemoLogin } from './components/demo/DemoLogin';
+import LandingPage from './components/landing/LandingPage';
 import { useAuth } from './contexts/AuthContext';
 import './App.css';
 
@@ -57,9 +58,7 @@ function AppRoutes() {
       } />
       
       {/* Default redirects */}
-      <Route path="/" element={
-        user ? <Navigate to="/dashboard" replace /> : <Navigate to="/demo" replace />
-      } />
+      <Route path="/" element={<LandingPage />} />
       
       {/* Unauthorized page */}
       <Route path="/unauthorized" element={
